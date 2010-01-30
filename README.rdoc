@@ -8,18 +8,15 @@ The webfrontend has two kinds of users: admins and owners. The admin users can s
 the domains on the server and have full control over the domains. The owner users can only
 see their own domains and can only create and modify records within their domains.
 
+The of the webfrontend is stored in a MongoDB database.
+
 == Install webfrontend
 
 1. Install MongoDB (binaries are available on http://www.mongodb.org).
 
-2. Download the BindAdmin source:
-
- $ git clone git://github.com/mrijkeboer/bindadmin.git
+2. Download the BindAdmin source (git clone).
 
 3. Install the needed gems:
-
- $ cd bindadmin/webapp
- $ rake gems:install
 
 4. Start the webfrontend.
 
@@ -29,9 +26,7 @@ see their own domains and can only create and modify records within their domain
 
 == Install client
 
-1. Modify the settings (SERVER, SERVERNAME and PASSWORD) at the top of the client:
-
- $ vi bindadmin/client/client.sh
+1. Modify the settings (SERVER, SERVERNAME and PASSWORD) at the top of client.sh:
 
 2. Install the client on your DNS servers.
 
