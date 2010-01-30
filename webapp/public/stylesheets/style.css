@@ -1,0 +1,244 @@
+/*
+ * orange			: #fb9715
+ * lightorange: #fbdaaf
+ * terra			: #a65f03   (#935a0d)
+ * darkgrey		: #4c4c4c
+ * grey				: #6c6c6c
+ * lightgrey	: #dadada
+ */
+
+* {
+	font-family: verdana, sans-serif;
+}
+
+body {
+	background-color: #dadada;
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 100%;
+}
+
+#welcome {
+	width: 28em;
+	margin: 3em auto 0 auto;
+}
+
+#sign_in {
+	background-color: #ffffff;
+	padding-top: 0.5em;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-bottom: 0.5em;
+}
+
+#sign_in label {
+	font-size: 0.875em;
+	font-weight: bold;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+#sign_in div {
+	margin-top: 0.5em;
+	margin-bottom: 1em;
+}
+
+#sign_in input#username {
+	width: 25em;
+}
+
+#sign_in input#password {
+	width: 25em;
+}
+
+#container {
+	margin-top: 0;
+	margin-left: 2em;
+	margin-right: 2em;
+	margin-bottom: 0;
+	padding: 0;
+}
+
+#header {
+	min-height: 5em;
+	background-color: #4c4c4c;
+	background-image: url('/images/header.png');
+	background-repeat: repeat-x;
+	background-position: bottom left;
+	position: relative;
+}
+
+#header .logo {
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+#header .logout {
+	position: absolute;
+	top: 8px;
+	right: 1em;
+	color: #fb9715;
+	font-size: 90%;
+}
+
+#tabs {
+	position: absolute;
+	bottom: 0;
+	right: 1em;
+}
+
+#tabs ul {
+	margin: 0;
+	padding: 0;
+	list-style: none
+}
+
+#tabs li {
+	display: inline;
+	float: left;
+	margin: 0px 0px 0px 0.25em;
+	padding: 0px;
+}
+
+#tabs a {
+	float: left;
+	display: block;
+	margin: 0;
+	padding: 4px 12px 3px 12px;
+	text-decoration: none;
+	font-weight: bold;
+	background-color: #a65f03;
+	color: #ffffff;
+	font-size: 90%;
+}
+
+#tabs .current a {
+	background-color: #ffffff;
+	color: #4c4c4c;
+}
+
+#content {
+	background-color: #ffffff;
+	margin-top: 0;
+	padding-top: 0.5em;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-bottom: 1em;
+	min-height: 22em;
+}
+
+#content a, #content a:visited {
+	color: #a65f03;
+}
+
+#content div.add {
+	font-size: 0.875em;
+}
+
+#content div.edit {
+	font-size: 0.875em;
+	text-align: right;
+	margin: 0;
+	padding: 0;
+}
+
+#content p.navpath {
+	margin: 0;
+	padding: 0;
+}
+
+#content h1 {
+	font-size: 2em;
+	margin-top: 0.5em;
+	margin-bottom: 0.3em;
+}
+
+#content table.show {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#content table.show th {
+	text-align: left;
+	font-size: 0.875em;
+	width: 8.5em;
+	vertical-align: baseline;
+}
+
+#content table.show td {
+	font-size: 0.875em;
+	vertical-align: baseline;
+}
+
+#content table.listing {
+	width: 100%;
+	color: #000000;
+	border-collapse: collapse;
+	text-align: left;
+	margin: 0px;
+}
+
+#content table.listing a {
+	color: #000000;
+}
+
+#content table.listing th {
+	padding: 3px 10px;
+	font-size: 0.875em;
+	font-weight: bold;
+	border-bottom: 1px solid #000000;
+	vertical-align: baseline;
+}
+
+#content table.listing td {
+	padding: 3px 10px;
+	font-size: 0.875em;
+	vertical-align: top;
+	border-bottom: 1px solid #dadada;
+	vertical-align: baseline;
+}
+
+#content table.listing td.changedColumn {
+	color: #6c6c6c;
+}
+
+#content table.listing td.createdColumn {
+	color: #6c6c6c;
+}
+
+#content table.edit th {
+	text-align: left;
+	font-size: 0.875em;
+	font-weight: normal;
+	padding-right: 1em;
+	vertical-align: baseline;
+}
+
+#content table.edit td {
+	vertical-align: baseline;
+}
+
+#content label.required {
+	font-weight: bold;
+}
+
+#content p {
+	font-size: 0.875em;
+}
+
+#content textarea.edit {
+	height: 15em;
+	font-size: 100%;
+}
+
+#footer {
+	height: 1em;
+	background-color: #4c4c4c
+}
+
+.formError {
+	color: #ff0000;
+	font-weight: bold;
+	margin-left: 10px;
+}

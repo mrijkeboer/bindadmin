@@ -1,0 +1,22 @@
+<% for domain in @domains %>
+	<tr>
+		<td class="nameColumn">
+			<%= link_to h(domain.name), owner_domain_url(domain) %>
+		</td>
+		<td class="typeColumn">
+			<%= h(domain.type) %>
+		</td>
+		<td class="ownerColumn">
+			<%= h(domain.owner) %>
+		</td>
+		<td class="createdColumn">
+			<%= h(domain.created_at.strftime('%Y-%m-%d %H:%M')) %>
+		</td>
+		<td class="createdColumn">
+			<%= h(domain.updated_at.strftime('%Y-%m-%d %H:%M')) %>
+		</td>
+		<td class="actionsColumn">
+			<%= link_to 'Details', owner_domain_url(domain) %>
+		</td>
+	</tr>
+<% end %>

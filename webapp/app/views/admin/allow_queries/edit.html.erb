@@ -1,0 +1,35 @@
+<p class="navpath">
+<%= link_to 'Domains', admin_domains_url -%> &raquo; 
+<%= link_to h(@domain.name), admin_domain_url(@domain) -%> &raquo;
+<%= link_to h(@allow_query.name), edit_admin_domain_allow_query_url(@domain.id, @allow_query) -%>
+</p>
+
+<h1>Edit allow query</h1>
+
+<p>Fields labeled in <b>bold</b> are required.</p>
+<% form_for(:allow_query, :url => admin_domain_allow_query_url(@domain.id, @allow_query), :html => { :method => :put }) do |form| %>
+
+	<table class="edit">
+		<tr>
+			<th><label for="allow_query_name" class="required">Name:</label></th>
+			<td><%= form.text_field :name %></td>
+			<td><%= error_message_on :allow_query, :name %></td>
+		</tr>
+
+		<tr>
+			<th><label for="allow_query_clients" class="required">Clients:</label></th>
+			<td>One per line:</td>
+		</tr>
+
+		<tr>
+			<th>&nbsp;</th>
+			<td><%= form.text_area :clients, :cols => 40 %></td>
+			<td><%= error_message_on :allow_query, :clients %></td>
+		</tr>
+
+		<tr>
+			<th>&nbsp;</th>
+			<td><%= submit_tag "Save", :class => "button" %></td>
+		</tr>
+	</table>
+<% end %>

@@ -1,0 +1,32 @@
+<p class="navpath">
+<%= link_to 'Users', admin_users_url -%> &raquo; 
+<%= link_to h(@user.fullname), admin_user_url(@user) -%>
+</p>
+
+<h1>User</h1>
+
+<table class="show">
+	<tr>
+		<th>Fullname</th>
+		<td><%= h(@user.fullname) -%></td>
+		<td>
+			<div class="edit"><%= link_to 'Edit', edit_admin_user_path(@user) -%></div>
+		</td>
+	</tr>
+	<tr>
+		<th>Username</th>
+		<td><%= h @user.username -%></td>
+	</tr>
+	<tr>
+		<th>Role</th>
+		<td><%= h @user.role -%></td>
+	</tr>
+	<tr>
+		<th>Created</th>
+		<td><%= @user.created_at.strftime('%Y-%m-%d %H:%M') -%></td>
+	</tr>
+	<tr>
+		<th>Changed</th>
+		<td><%= @user.updated_at.strftime('%Y-%m-%d %H:%M') -%></td>
+	</tr>
+</table>

@@ -1,0 +1,54 @@
+<p class="navpath">
+<%= link_to 'Domains', admin_domains_url -%> &raquo; 
+<%= link_to h(@domain.name), admin_domain_url(@domain) -%> &raquo;
+<%= link_to 'new record', new_admin_domain_record_url(@domain.id) -%>
+</p>
+
+<h1>New record</h1>
+
+<p>Fields labeled in <b>bold</b> are required.</p>
+<% form_for(:record, :url => admin_domain_records_url(@domain.id)) do |f| %>
+
+	<table class="edit">
+		<tr>
+			<th><label for="record_name" class="required">Name:</label></th>
+			<td><%= f.text_field :name %></td>
+			<td><%= error_message_on :record, :name %></td>
+		</tr>
+
+		<tr>
+			<th><label for="record_ttl">TTL:</label></th>
+			<td><%= f.text_field :ttl %></td>
+			<td><%= error_message_on :record, :ttl %></td>
+		</tr>
+
+		<tr>
+			<th><label for="record_type" class="required">Type:</label></th>
+			<td><%= f.select :type, Record::TYPES %></td>
+			<td><%= error_message_on :record, :type %></td>
+		</tr>
+
+		<tr>
+			<th><label for="record_pref">Preference:</label></th>
+			<td><%= f.text_field :pref %></td>
+			<td><%= error_message_on :record, :pref %></td>
+		</tr>
+
+		<tr>
+			<th><label for="record_content" class="required">Content:</label></th>
+			<td><%= f.text_field :content %></td>
+			<td><%= error_message_on :record, :content %></td>
+		</tr>
+
+		<tr>
+			<th><label for="record_locked">Locked:</label></th>
+			<td><%= f.check_box :locked %></td>
+			<td><%= error_message_on :record, :locked %></td>
+		</tr>
+
+		<tr>
+			<th>&nbsp;</th>
+			<td><%= submit_tag "Save", :class => "button" %></td>
+		</tr>
+	</table>
+<% end %>

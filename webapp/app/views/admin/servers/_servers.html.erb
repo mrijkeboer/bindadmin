@@ -1,0 +1,13 @@
+<% for server in @servers %>
+	<tr>
+		<td class="servernameColumn">
+			<%= link_to h(server.servername), admin_server_url(server) %>
+		</td>
+
+		<td class="actionsColumn">
+			<%= link_to 'Details', admin_server_url(server) -%>,
+			<%= link_to 'Edit', edit_admin_server_url(server) -%>,
+			<%= link_to 'Delete', admin_server_url(server), :method => :delete %>
+		</td>
+	</tr>
+<% end %>

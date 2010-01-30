@@ -1,0 +1,60 @@
+= BindAdmin
+
+A Ruby on Rails application for managing Bind zones. The application contains a
+webfrontend which is used to create and modify the zones and a client which is used
+to get the changed zones on the DNS servers (Bind).
+
+The webfrontend has two kinds of users: admins and owners. The admin users can see all
+the domains on the server and have full control over the domains. The owner users can only
+see their own domains and can only create and modify records within their domains.
+
+== Install webfrontend
+
+1. Install MongoDB (binaries are available on http://www.mongodb.org).
+
+2. Download the BindAdmin source:
+
+ $ git clone git://github.com/mrijkeboer/bindadmin.git
+
+3. Install the needed gems:
+
+ $ cd bindadmin/webapp
+ $ rake gems:install
+
+4. Start the webfrontend.
+
+5. Add your DNS servers in the webfrontend.
+
+6. Add your domains.
+
+== Install client
+
+1. Modify the settings (SERVER, SERVERNAME and PASSWORD) at the top of the client:
+
+ $ vi bindadmin/client/client.sh
+
+2. Install the client on your DNS servers.
+
+3. Add an entry to cron to call the client script.
+
+4. Configure Bind to check for zone definitions in /var/spool/bindadmin/zones.conf
+
+5. Configure Bind to lookup zone content in /var/spool/bindadmin/zones/
+
+== Dependencies webfrontend
+
+ * Bcrypt Ruby (bcrypt-ruby)
+ * Mongo Ruby Driver (mongo)
+ * MongoMapper (mongo_mapper)
+ * Rails (currently 2.3.5)
+ * Validatable (jnunemaker-validatable)
+ 
+== Dependencies client
+
+ * Bash
+ * Bind
+ * Wget
+
+== Copyright
+
+Copyright (c) 2010 Martijn P. Rijkeboer. See BSD-LICENSE for details.

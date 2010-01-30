@@ -1,0 +1,47 @@
+<p class="navpath">
+<%= link_to 'Users', admin_users_url -%> &raquo; 
+<%= link_to 'new', new_admin_user_url -%>
+</p>
+
+<h1>New user</h1>
+
+<p>Fields labeled in <b>bold</b> are required.</p>
+<% form_for(:user, :url => admin_users_url) do |form| %>
+
+	<table class="edit">
+		<tr>
+			<th><label for="user_username" class="required">Username:</label></th>
+			<td><%= form.text_field :username %></td>
+			<td><%= error_message_on :user, :username %></td>
+		</tr>
+
+		<tr>
+			<th><label for="user_fullname" class="required">Fullname:</label></th>
+			<td><%= form.text_field :fullname %></td>
+			<td><%= error_message_on :user, :fullname %></td>
+		</tr>
+
+		<tr>
+			<th><label for="user_role" class="required">Role:</label></th>
+			<td><%= form.select :role, User::ROLES %></td>
+			<td><%= error_message_on :user, :role %></td>
+		</tr>
+
+		<tr>
+			<th><label for="user_password" class="required">Password:</label></th>
+			<td><%= form.password_field :password %></td>
+			<td><%= error_message_on :user, :password %></td>
+		</tr>
+
+		<tr>
+			<th><label for="user_password_confirmation" class="required">Confirm:</label></th>
+			<td><%= form.password_field :password_confirmation %></td>
+			<td><%= error_message_on :user, :password_confirmation %></td>
+		</tr>
+
+		<tr>
+			<th>&nbsp;</th>
+			<td><%= submit_tag "Save", :class => "button" %></td>
+		</tr>
+	</table>
+<% end %>

@@ -1,0 +1,29 @@
+<p class="navpath">
+<%= link_to 'Defaults', admin_default_url(@default) -%> &raquo; 
+<%= link_to 'new name server', new_admin_default_name_server_url(@default.id) -%>
+</p>
+
+<h1>New name server</h1>
+
+<p>Fields labeled in <b>bold</b> are required.</p>
+<% form_for(:name_server, :url => admin_default_name_servers_url(@default.id)) do |f| %>
+
+	<table class="edit">
+		<tr>
+			<th><label for="name_server_name" class="required">Fqdn:</label></th>
+			<td><%= f.text_field :fqdn %></td>
+			<td><%= error_message_on :name_server, :fqdn %></td>
+		</tr>
+
+		<tr>
+			<th><label for="name_server_ttl">TTL:</label></th>
+			<td><%= f.text_field :ttl %></td>
+			<td><%= error_message_on :name_server, :ttl %></td>
+		</tr>
+
+		<tr>
+			<th>&nbsp;</th>
+			<td><%= submit_tag "Save", :class => "button" %></td>
+		</tr>
+	</table>
+<% end %>

@@ -1,0 +1,2 @@
+module Admin::AllowQueriesHelper
+end

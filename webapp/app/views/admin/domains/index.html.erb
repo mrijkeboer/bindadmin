@@ -1,0 +1,22 @@
+<p class="navpath">
+<%= link_to 'Domains', admin_domains_url -%>
+</p>
+
+<h1>Domains</h1>
+
+<table class="listing">
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Owner</th>
+		<th>Created</th>
+		<th>Last updated</th>
+		<th>Action</th>
+	</tr>
+
+	<%= render :partial => 'domains' %>
+</table>
+
+<div class="add">
+	<p><%= link_to 'New domain', new_admin_domain_url %></p>
+</div>

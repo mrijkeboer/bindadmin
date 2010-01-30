@@ -1,0 +1,35 @@
+<p class="navpath">
+<%= link_to 'Defaults', admin_default_url(@default) -%> &raquo; 
+<%= link_to h(@mail_server.fqdn), edit_admin_default_mail_server_url(@default.id, @mail_server) -%>
+</p>
+
+<h1>Edit mail server</h1>
+
+<p>Fields labeled in <b>bold</b> are required.</p>
+<% form_for(:mail_server, :url => admin_default_mail_server_url(@default.id, @mail_server), :html => { :method => :put }) do |form| %>
+
+	<table class="edit">
+		<tr>
+			<th><label for="mail_server_fqdn" class="required">Fqdn:</label></th>
+			<td><%= form.text_field :fqdn %></td>
+			<td><%= error_message_on :mail_server, :fqdn %></td>
+		</tr>
+
+		<tr>
+			<th><label for="mail_server_pref" class="required">Preference:</label></th>
+			<td><%= form.text_field :pref, :class => 'text' %></td>
+			<td><%= error_message_on :mail_server, :pref %></td>
+		</tr>
+
+		<tr>
+			<th><label for="mail_server_ttl">TTL:</label></th>
+			<td><%= form.text_field :ttl, :class => 'text' %></td>
+			<td><%= error_message_on :mail_server, :ttl %></td>
+		</tr>
+
+		<tr>
+			<th>&nbsp;</th>
+			<td><%= submit_tag "Save", :class => "button" %></td>
+		</tr>
+	</table>
+<% end %>

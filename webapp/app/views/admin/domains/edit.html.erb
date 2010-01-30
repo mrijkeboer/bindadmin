@@ -1,0 +1,40 @@
+<p class="navpath">
+<%= link_to 'Domains', admin_domains_url -%> &raquo; 
+<%= link_to h(@domain.name), admin_domain_url(@domain) -%> &raquo;
+<%= link_to 'edit', edit_admin_domain_url(@domain) -%>
+</p>
+
+<h1>Edit domain</h1>
+
+<p>Fields labeled in <b>bold</b> are required.</p>
+<% form_for(:domain, :url => admin_domain_url(@domain), :html => { :method => :put }) do |form| %>
+
+	<table class="edit">
+		<tr>
+			<th><label for="domain_name" class="required">Name:</label></th>
+			<td><%= form.text_field :name, :disabled => "disabled" %></td>
+			<td><%= error_message_on :domain, :name %></td>
+		</tr>
+
+		<tr>
+			<th><label for="domain_type" class="required">Type:</label></th>
+			<td><%= form.select :type, Domain::TYPES %></td>
+		</tr>
+
+		<tr>
+			<th><label for="domain_master">Master:</label></th>
+			<td><%= form.text_field :master %></td>
+			<td><%= error_message_on :domain, :master %></td>
+		</tr>
+
+		<tr>
+			<th><label for="domain_user_id" class="required">Owner:</label></th>
+			<td><%= form.collection_select :user_id, User.find(:all, :order => "fullname" ), :id, :fullname %></td>
+		</tr>
+
+		<tr>
+			<th>&nbsp;</th>
+			<td><%= submit_tag "Save", :class => "button" %></td>
+		</tr>
+	</table>
+<% end %>
