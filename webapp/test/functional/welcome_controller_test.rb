@@ -6,7 +6,7 @@ class WelcomeControllerTest < ActionController::TestCase
 	#
 	# index
 	#
-	
+
 	test "on GET to :index should redirect to sign_in" do
 		get :index
 		assert_redirected_to sign_in_path
@@ -16,7 +16,15 @@ class WelcomeControllerTest < ActionController::TestCase
 	#
 	# sign_in
 	#
+	
+	test "on GET to :sign_in with no users in the DB should redirect to new_admin_user" do
+		get :sign_in
+		assert_redirected_to new_admin_user_path
+	end
+
+
 	test "on GET to :sign_in should get sign_in page" do
+		Factory.user!
 		get :sign_in
 
 		assert_template :sign_in
@@ -59,6 +67,5 @@ class WelcomeControllerTest < ActionController::TestCase
 
 		assert_redirected_to sign_in_path
 	end
-
 
 end

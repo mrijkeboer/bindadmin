@@ -1,6 +1,8 @@
 class Admin::UsersController < ApplicationController
 
-	before_filter :check_admin
+	before_filter :check_admin, :except => [:new, :create]
+	before_filter :check_admin_and_user_count, :only => [:new, :create]
+
 
   # GET /admin/users
   def index

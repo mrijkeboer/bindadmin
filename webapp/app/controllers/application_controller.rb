@@ -10,20 +10,20 @@ class ApplicationController < ActionController::Base
 	private
 
 
-	def check_signed_in
-		if @admin = User.find_by_id(session[:admin_id]) == nil
-			if @owner = User.find_by_id(session[:owner_id]) == nil
-				session[:orig_url] = request.request_uri
-				redirect_to sign_in_url
-			end
-		end
-	end
-
-
 	def check_admin
 		unless @admin = User.find_by_id(session[:admin_id])
 			session[:orig_url] = request.request_uri
 			redirect_to sign_in_url
+		end
+	end
+
+
+	def check_admin_and_user_count
+		unless @admin = User.find_by_id(session[:admin_id])
+			if User.count > 0
+				session[:orig_url] = request.request_uri
+				redirect_to sign_in_url
+			end
 		end
 	end
 
@@ -65,6 +65,5 @@ class ApplicationController < ActionController::Base
 	def find_default
 		@default = Default.instance
 	end
-
 
 end
