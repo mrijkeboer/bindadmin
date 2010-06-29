@@ -109,4 +109,20 @@ class DomainTest < ActiveSupport::TestCase
 		assert_equal 0, Domain.changed(Time.now.to_i).count
 	end
 
+
+	#
+	# create_records
+	#
+	test "ensure that a new native domain has a soa record" do
+		domain = Factory.domain!(:type => 'Native')
+		assert domain.records.count > 0
+		assert domain.records[0].soa?
+	end
+
+
+	test "ensure that a new slave domain has no records" do
+		domain = Factory.domain!(:type => 'Slave', :master => 'ns1.example.com')
+		assert domain.records.count == 0
+	end
+
 end

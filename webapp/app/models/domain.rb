@@ -31,10 +31,11 @@ class Domain
 
 	validates_associated :allow_queries, :records
 
+	before_create :create_records
 	before_save :set_owner
 
 
-	def before_create
+	def create_records
 		if self.native?
 			for record in Record.default_records(self.name)
 				self.records << record
