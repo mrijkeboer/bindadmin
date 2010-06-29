@@ -57,7 +57,7 @@ class Domain
 
 
 	def Domain.changed(timestamp = 0)
-		return Domain.find(:all, :conditions => {:updated_at => { '$gt' => Time.at(timestamp.to_i) }} )
+		return Domain.where(:updated_at.gt => Time.at(timestamp.to_i)).all
 	end
 
 

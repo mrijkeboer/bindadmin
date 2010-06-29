@@ -29,7 +29,7 @@
 
 		<tr>
 			<th><label for="domain_user_id" class="required">Owner:</label></th>
-			<td><%= form.collection_select :user_id, User.find(:all, :order => "fullname" ), :id, :fullname %></td>
+			<td><%= form.collection_select :user_id, User.sort(:fullname).all, :id, :fullname %></td>
 		</tr>
 
 		<tr>
