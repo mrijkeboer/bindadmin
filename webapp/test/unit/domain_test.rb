@@ -74,6 +74,14 @@ class DomainTest < ActiveSupport::TestCase
 	end
 
 
+	test "ensure owner is set before saving" do
+		domain = Factory.domain
+		assert domain.owner.to_s.length == 0
+		domain.save
+		assert domain.owner.to_s.length > 0
+	end
+
+
 	#
 	# native?
 	#

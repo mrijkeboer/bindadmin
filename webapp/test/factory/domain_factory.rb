@@ -6,8 +6,7 @@ module DomainFactory
 			{
 				:name => 'example.com',
 				:type => 'Native',
-				:user => Factory.user,
-				:owner => 'Test owner'
+				:user => Factory.user
 			}
 		end
 

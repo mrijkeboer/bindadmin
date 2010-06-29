@@ -31,6 +31,8 @@ class Domain
 
 	validates_associated :allow_queries, :records
 
+	before_save :set_owner
+
 
 	def before_create
 		if self.native?
@@ -41,7 +43,7 @@ class Domain
 	end
 
 
-	def before_save
+	def set_owner
 		self.owner = self.user.fullname
 	end
 
