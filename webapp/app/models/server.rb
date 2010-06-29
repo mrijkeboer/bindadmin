@@ -15,9 +15,11 @@ class Server
 	validates_format_of :servername, :with => /\A(?:[a-z0-9_])+\Z/i
 	
 	validate :valid_password
+
+	after_save :clear_password
 	
 
-	def after_save
+	def clear_password
 		@password = nil
 		@password_confirmation = nil
 	end
