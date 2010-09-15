@@ -1,3 +1,5 @@
+require 'validate/dns'
+
 class NameServer
 	include MongoMapper::EmbeddedDocument
 

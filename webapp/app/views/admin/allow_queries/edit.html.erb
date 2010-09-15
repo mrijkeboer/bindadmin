@@ -7,13 +7,13 @@
 <h1>Edit allow query</h1>
 
 <p>Fields labeled in <b>bold</b> are required.</p>
-<% form_for(:allow_query, :url => admin_domain_allow_query_url(@domain.id, @allow_query), :html => { :method => :put }) do |form| %>
+<%= form_for(:allow_query, :url => admin_domain_allow_query_url(@domain.id, @allow_query), :html => { :method => :put }) do |form| %>
 
 	<table class="edit">
 		<tr>
 			<th><label for="allow_query_name" class="required">Name:</label></th>
 			<td><%= form.text_field :name %></td>
-			<td><%= error_message_on :allow_query, :name %></td>
+			<td><%= @allow_query.errors[:name].first %></td>
 		</tr>
 
 		<tr>
@@ -24,7 +24,7 @@
 		<tr>
 			<th>&nbsp;</th>
 			<td><%= form.text_area :clients, :cols => 40 %></td>
-			<td><%= error_message_on :allow_query, :clients %></td>
+			<td><%= @allow_query.errors[:clients].first %></td>
 		</tr>
 
 		<tr>

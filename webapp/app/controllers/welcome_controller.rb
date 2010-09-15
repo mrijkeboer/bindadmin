@@ -55,7 +55,7 @@ class WelcomeController < ApplicationController
 	def check_signed_in
 		if @admin = User.find_by_id(session[:admin_id]) == nil
 			if @owner = User.find_by_id(session[:owner_id]) == nil
-				session[:orig_url] = request.request_uri
+				session[:orig_url] = request.fullpath
 				redirect_to sign_in_url
 			end
 		end

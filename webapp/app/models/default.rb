@@ -1,3 +1,5 @@
+require 'validate/dns'
+
 class Default
 	include MongoMapper::Document
 
@@ -30,6 +32,7 @@ class Default
 
 
 	private
+
 
 	def valid_defaults
 		Validate::Dns.validate_time(ttl, errors, :ttl)

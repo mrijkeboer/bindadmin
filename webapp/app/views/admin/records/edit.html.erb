@@ -7,19 +7,19 @@
 <h1>Edit record</h1>
 
 <p>Fields labeled in <b>bold</b> are required.</p>
-<% form_for(:record, :url => admin_domain_record_url(@domain.id, @record), :html => { :method => :put }) do |form| %>
+<%= form_for(:record, :url => admin_domain_record_url(@domain.id, @record), :html => { :method => :put }) do |form| %>
 
 	<table class="edit">
 		<tr>
 			<th><label for="record_name" class="required">Name:</label></th>
 			<td><%= form.text_field :name %></td>
-			<td><%= error_message_on :record, :name %></td>
+			<td><%= @record.errors[:name].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="record_ttl">TTL:</label></th>
 			<td><%= form.text_field :ttl, :class => 'text' %></td>
-			<td><%= error_message_on :record, :ttl %></td>
+			<td><%= @record.errors[:ttl].first %></td>
 		</tr>
 
 		<tr>
@@ -30,19 +30,19 @@
 		<tr>
 			<th><label for="record_pref">Preference:</label></th>
 			<td><%= form.text_field :pref, :class => 'text' %></td>
-			<td><%= error_message_on :record, :pref %></td>
+			<td><%= @record.errors[:pref].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="record_content" class="required">Content:</label></th>
 			<td><%= form.text_field :content, :class => 'text' %></td>
-			<td><%= error_message_on :record, :content %></td>
+			<td><%= @record.errors[:content].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="record_locked">Locked:</label></th>
 			<td><%= form.check_box :locked %></td>
-			<td><%= error_message_on :record, :locked %></td>
+			<td><%= @record.errors[:locked].first %></td>
 		</tr>
 
 		<tr>

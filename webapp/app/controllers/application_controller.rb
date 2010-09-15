@@ -1,18 +1,12 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
-  helper :all
   protect_from_forgery
-  filter_parameter_logging :password
-
 
 	private
 
 
 	def check_admin
 		unless @admin = User.find_by_id(session[:admin_id])
-			session[:orig_url] = request.request_uri
+			session[:orig_url] = request.fullpath
 			redirect_to sign_in_url
 		end
 	end
@@ -21,7 +15,7 @@ class ApplicationController < ActionController::Base
 	def check_admin_and_user_count
 		unless @admin = User.find_by_id(session[:admin_id])
 			if User.count > 0
-				session[:orig_url] = request.request_uri
+				session[:orig_url] = request.fullpath
 				redirect_to sign_in_url
 			end
 		end
@@ -30,7 +24,7 @@ class ApplicationController < ActionController::Base
 
 	def check_owner
 		unless @owner = User.find_by_id(session[:owner_id])
-			session[:orig_url] = request.request_uri
+			session[:orig_url] = request.fullpath
 			redirect_to sign_in_url
 		end
 	end
@@ -65,5 +59,6 @@ class ApplicationController < ActionController::Base
 	def find_default
 		@default = Default.instance
 	end
+
 
 end

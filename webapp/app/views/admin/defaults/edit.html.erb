@@ -6,55 +6,55 @@
 <h1>Edit defaults</h1>
 
 <p>Fields labeled in <b>bold</b> are required.</p>
-<% form_for(:default, :url => admin_default_url(@default), :html => { :method => :put}) do |f| %>
+<%= form_for(:default, :url => admin_default_url(@default), :html => { :method => :put}) do |f| %>
 
 	<table class="edit">
 		<tr>
 			<th><label for="default_ttl" class="required">TTL:</label></th>
 			<td><%= f.text_field :ttl %></td>
-			<td><%= error_message_on :default, :ttl %></td>
+			<td><%= @default.errors[:ttl].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="default_mname" class="required">Origin:</label></th>
 			<td><%= f.text_field :mname %></td>
-			<td><%= error_message_on :default, :mname %></td>
+			<td><%= @default.errors[:mname].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="default_rname" class="required">Person:</label></th>
 			<td><%= f.text_field :rname %></td>
-			<td><%= error_message_on :default, :rname %></td>
+			<td><%= @default.errors[:rname].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="default_serial" class="required">Serial:</label></th>
 			<td><%= f.text_field :serial %></td>
-			<td><%= error_message_on :default, :serial %></td>
+			<td><%= @default.errors[:serial].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="default_refresh" class="required">Refresh:</label></th>
 			<td><%= f.text_field :refresh %></td>
-			<td><%= error_message_on :default, :refresh %></td>
+			<td><%= @default.errors[:refresh].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="default_retry" class="required">Retry:</label></th>
 			<td><%= f.text_field :retry %></td>
-			<td><%= error_message_on :default, :retry %></td>
+			<td><%= @default.errors[:retry].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="default_expire" class="required">Expire:</label></th>
 			<td><%= f.text_field :expire %></td>
-			<td><%= error_message_on :default, :expire %></td>
+			<td><%= @default.errors[:expire].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="default_minimum" class="required">Minimum:</label></th>
 			<td><%= f.text_field :minimum %></td>
-			<td><%= error_message_on :default, :minimum %></td>
+			<td><%= @default.errors[:minimum].first %></td>
 		</tr>
 
 		<tr>

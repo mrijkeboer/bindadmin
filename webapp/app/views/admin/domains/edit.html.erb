@@ -7,13 +7,13 @@
 <h1>Edit domain</h1>
 
 <p>Fields labeled in <b>bold</b> are required.</p>
-<% form_for(:domain, :url => admin_domain_url(@domain), :html => { :method => :put }) do |form| %>
+<%= form_for(:domain, :url => admin_domain_url(@domain), :html => { :method => :put }) do |form| %>
 
 	<table class="edit">
 		<tr>
 			<th><label for="domain_name" class="required">Name:</label></th>
 			<td><%= form.text_field :name, :disabled => "disabled" %></td>
-			<td><%= error_message_on :domain, :name %></td>
+			<td><%= @domain.errors[:name].first %></td>
 		</tr>
 
 		<tr>
@@ -24,7 +24,7 @@
 		<tr>
 			<th><label for="domain_master">Master:</label></th>
 			<td><%= form.text_field :master %></td>
-			<td><%= error_message_on :domain, :master %></td>
+			<td><%= @domain.errors[:master].first %></td>
 		</tr>
 
 		<tr>

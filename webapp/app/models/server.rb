@@ -1,4 +1,5 @@
 require 'bcrypt'
+require 'validate/dns'
 
 class Server
 	include MongoMapper::Document

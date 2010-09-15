@@ -6,19 +6,19 @@
 <h1>New name server</h1>
 
 <p>Fields labeled in <b>bold</b> are required.</p>
-<% form_for(:name_server, :url => admin_default_name_servers_url(@default.id)) do |f| %>
+<%= form_for(:name_server, :url => admin_default_name_servers_url(@default.id)) do |f| %>
 
 	<table class="edit">
 		<tr>
 			<th><label for="name_server_name" class="required">Fqdn:</label></th>
 			<td><%= f.text_field :fqdn %></td>
-			<td><%= error_message_on :name_server, :fqdn %></td>
+			<td><%= @name_server.errors[:fqdn].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="name_server_ttl">TTL:</label></th>
 			<td><%= f.text_field :ttl %></td>
-			<td><%= error_message_on :name_server, :ttl %></td>
+			<td><%= @name_server.errors[:ttl].first %></td>
 		</tr>
 
 		<tr>

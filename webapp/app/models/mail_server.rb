@@ -1,3 +1,5 @@
+require 'validate/dns'
+
 class MailServer
 	include MongoMapper::EmbeddedDocument
 

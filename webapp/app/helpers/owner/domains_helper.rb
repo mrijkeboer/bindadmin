@@ -1,2 +1,0 @@
-module Owner::DomainsHelper
-end

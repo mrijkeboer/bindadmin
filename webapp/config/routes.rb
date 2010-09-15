@@ -1,39 +1,41 @@
-ActionController::Routing::Routes.draw do |map|
+BindAdmin::Application.routes.draw do
 
-
-	map.root :controller => 'welcome'
-	map.sign_in 'welcome/sign_in', :controller => 'welcome', :action => 'sign_in'
-	map.sign_out 'welcome/sign_out', :controller => 'welcome', :action => 'sign_out'
-
-	map.namespace :admin do |admin|
-		admin.root :controller => 'domains', :action => 'index'
-
-		admin.resources :defaults do |default|
-			default.resources :mail_servers
-			default.resources :name_servers
-		end
-
-		admin.resources :domains do |domain|
-			domain.resources :allow_queries
-			domain.resources :records
-		end
-
-		admin.resources :servers
-		admin.resources :users
-	end
-
-
-	map.namespace :owner do |owner|
-		owner.root :controller => 'domains', :action => 'index'
-
-		owner.resources :domains do |domain|
-			domain.resources :records
-		end
-	end
-
+	root :to => 'welcome#index'
 	
-	map.namespace :bind do |bind|
-		bind.configs 'configs/:servername/:password/:last_change_id', :controller => 'configs', :action => 'index'
+	match '/sign_in',  :to => 'welcome#sign_in'
+	match '/sign_out', :to => 'welcome#sign_out'
+
+
+	namespace :admin do
+		root :to => 'domains#index'
+
+		resources :defaults do
+			resources :mail_servers
+			resources :name_servers
+		end
+
+		resources :domains do
+			resources :allow_queries
+			resources :records
+		end
+
+		resources :servers
+		resources :users
 	end
+
+
+	namespace :owner do
+		root :to => 'domains#index'
+
+		resources :domains do
+			resources :records
+		end
+	end
+
+
+	namespace :bind do
+		match 'configs/:servername/:password/:last_change_id', :to => 'configs#index', :as => 'configs'
+	end
+
 
 end

@@ -41,7 +41,7 @@ The of the webfrontend is stored in a MongoDB database.
  * Bcrypt Ruby (bcrypt-ruby)
  * Mongo Ruby Driver (mongo)
  * MongoMapper (mongo_mapper)
- * Rails (currently 2.3.5)
+ * Rails (currently 3.0.0)
  * Validatable (jnunemaker-validatable)
  
 == Dependencies client

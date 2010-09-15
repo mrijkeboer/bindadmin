@@ -8,25 +8,25 @@
 
 <p>Fields labeled in <b>bold</b> are required.</p>
 
-<% form_for(:server, :url => admin_server_url(@server), :html => { :method => :put }) do |form| %>
+<%= form_for(:server, :url => admin_server_url(@server), :html => { :method => :put }) do |form| %>
 
 	<table class="edit">
 		<tr>
 			<th><label for="server_servername" class="required">Servername:</label></th>
 			<td><%= form.text_field :servername, :disabled => "disabled" %></td>
-			<td><%= error_message_on :server, :servername %></td>
+			<td><%= @server.errors[:servername].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="server_password" class="required">Password:</label></th>
 			<td><%= form.password_field :password %></td>
-			<td><%= error_message_on :server, :password %></td>
+			<td><%= @server.errors[:password].first %></td>
 		</tr>
 
 		<tr>
 			<th><label for="server_password_confirmation" class="required">Confirm:</label></th>
 			<td><%= form.password_field :password_confirmation %></td>
-			<td><%= error_message_on :server, :password_confirmation %></td>
+			<td><%= @server.errors[:password_confirmation].first %></td>
 		</tr>
 
 		<tr>

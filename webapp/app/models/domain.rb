@@ -1,3 +1,5 @@
+require 'validate/dns'
+
 class Domain
 	include MongoMapper::Document
 

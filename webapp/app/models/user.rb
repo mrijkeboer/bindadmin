@@ -1,4 +1,5 @@
 require 'bcrypt'
+require 'validate/dns'
 
 class User
 	include MongoMapper::Document
