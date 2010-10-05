@@ -1,0 +1,86 @@
+%p.navpath
+  = link_to 'Domains', owner_domains_url
+  \&raquo;
+  \#{link_to h(@domain.name), owner_domain_url(@domain)}
+%h1 Domain
+%table.show
+  %tr
+    %th Name
+    %td
+      = h(@domain.name)
+  %tr
+    %th Type
+    %td= h @domain.type
+  - if @domain.slave?
+    %tr
+      %th Master
+      %td
+      - if @domain.master
+        = h @domain.master
+      - else
+        \&nbsp;
+  %tr
+    %th Owner
+    %td= h @domain.owner
+  %tr
+    %th Created
+    %td= h(@domain.created_at.strftime('%Y-%m-%d %H:%M'))
+  %tr
+    %th Last updated
+    %td= h(@domain.updated_at.strftime('%Y-%m-%d %H:%M'))
+%hr/
+- if @domain.native?
+  %table.show
+    - counter = 0
+    - for record in @domain.records
+      %tr
+        - if counter == 0
+          %th Records
+        - else
+          %th &nbsp;
+        %td
+          = h(record.name)
+        %td
+          - if record.ttl
+            = h(record.ttl)
+          - else
+            \&nbsp;
+        %td
+          - if record.mx?
+            = h(record.type)
+            (#{h(record.pref)})
+          - else
+            = h(record.type)
+        %td
+          = h(record.content)
+        %td
+          - if record.locked
+            \&nbsp;
+          - else
+            .edit
+              = link_to 'Edit', edit_owner_domain_record_url(@domain.id, record)
+              ,
+              = link_to 'Delete', owner_domain_record_url(@domain.id, record), :method => 'delete'
+      - counter += 1
+    %tr
+      - if counter == 0
+        %th Records
+      - else
+        %th &nbsp;
+      %td
+        .add
+          = link_to 'Add a record', new_owner_domain_record_url(@domain.id)
+%hr/
+%table.show
+  - counter = 0
+  - for query in @domain.allow_queries
+    %tr
+      - if counter == 0
+        %th Allow queries
+      - else
+        %th &nbsp;
+      %td{:title => h(query.clients)}= h(query.name)
+    - counter += 1
+  - if counter == 0
+    %tr
+      %th Allow queries

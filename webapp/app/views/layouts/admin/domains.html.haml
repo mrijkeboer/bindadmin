@@ -1,0 +1,20 @@
+!!!
+%html{"xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %title BindAdmin
+    = stylesheet_link_tag "style.css", :media => "all"
+    = javascript_include_tag :defaults
+  %body
+    #wrapper
+      #header
+        %img.logo{:alt => "BindAdmin", :src => "/images/logo.png"}/
+        = link_to "sign out", sign_out_url, :class => "logout"
+        #tabs
+          %ul
+            %li.current= link_to "Domains", admin_domains_url
+            %li= link_to "Users", admin_users_url
+            %li= link_to "Servers", admin_servers_url
+            %li= link_to "Defaults", admin_defaults_url
+      #content
+        = yield :layout
+      #footer

@@ -1,0 +1,12 @@
+%p.navpath
+  = link_to 'Users', admin_users_url
+%h1 Users
+%table.listing
+  %tr
+    %th Fullname
+    %th Role
+    %th Username
+    %th Action
+  = render :partial => 'users'
+.add
+  %p= link_to 'New user', new_admin_user_url

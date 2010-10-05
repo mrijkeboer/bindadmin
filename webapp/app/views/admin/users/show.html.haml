@@ -1,0 +1,23 @@
+%p.navpath
+  = link_to 'Users', admin_users_url
+  \&raquo;
+  \#{link_to h(@user.fullname), admin_user_url(@user)}
+%h1 User
+%table.show
+  %tr
+    %th Fullname
+    %td= h(@user.fullname)
+    %td
+      .edit= link_to 'Edit', edit_admin_user_path(@user)
+  %tr
+    %th Username
+    %td= h @user.username
+  %tr
+    %th Role
+    %td= h @user.role
+  %tr
+    %th Created
+    %td= @user.created_at.strftime('%Y-%m-%d %H:%M')
+  %tr
+    %th Changed
+    %td= @user.updated_at.strftime('%Y-%m-%d %H:%M')

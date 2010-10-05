@@ -1,0 +1,54 @@
+%p.navpath
+  = link_to 'Defaults', admin_default_url(@default)
+  \&raquo;
+  \#{link_to 'edit', edit_admin_default_url(@default)}
+%h1 Edit defaults
+%p
+  Fields labeled in
+  %b bold
+  are required.
+= form_for(:default, :url => admin_default_url(@default), :html => { :method => :put}) do |f|
+  %table.edit
+    %tr
+      %th
+        %label.required{:for => "default_ttl"} TTL:
+      %td= f.text_field :ttl
+      %td= @default.errors[:ttl].first
+    %tr
+      %th
+        %label.required{:for => "default_mname"} Origin:
+      %td= f.text_field :mname
+      %td= @default.errors[:mname].first
+    %tr
+      %th
+        %label.required{:for => "default_rname"} Person:
+      %td= f.text_field :rname
+      %td= @default.errors[:rname].first
+    %tr
+      %th
+        %label.required{:for => "default_serial"} Serial:
+      %td= f.text_field :serial
+      %td= @default.errors[:serial].first
+    %tr
+      %th
+        %label.required{:for => "default_refresh"} Refresh:
+      %td= f.text_field :refresh
+      %td= @default.errors[:refresh].first
+    %tr
+      %th
+        %label.required{:for => "default_retry"} Retry:
+      %td= f.text_field :retry
+      %td= @default.errors[:retry].first
+    %tr
+      %th
+        %label.required{:for => "default_expire"} Expire:
+      %td= f.text_field :expire
+      %td= @default.errors[:expire].first
+    %tr
+      %th
+        %label.required{:for => "default_minimum"} Minimum:
+      %td= f.text_field :minimum
+      %td= @default.errors[:minimum].first
+    %tr
+      %th &nbsp;
+      %td= submit_tag "Save", :class => "button"

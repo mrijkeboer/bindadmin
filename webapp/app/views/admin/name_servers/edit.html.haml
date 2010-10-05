@@ -1,0 +1,24 @@
+%p.navpath
+  = link_to 'Defaults', admin_default_url(@default)
+  \&raquo;
+  \#{link_to h(@name_server.fqdn), edit_admin_default_name_server_url(@default.id, @name_server)}
+%h1 Edit name server
+%p
+  Fields labeled in
+  %b bold
+  are required.
+= form_for(:name_server, :url => admin_default_name_server_url(@default.id, @name_server), :html => { :method => :put }) do |form|
+  %table.edit
+    %tr
+      %th
+        %label.required{:for => "name_server_fqdn"} Fqdn:
+      %td= form.text_field :fqdn
+      %td= @name_server.errors[:fqdn].first
+    %tr
+      %th
+        %label{:for => "name_server_ttl"} TTL:
+      %td= form.text_field :ttl, :class => 'text'
+      %td= @name_server.errors[:ttl].first
+    %tr
+      %th &nbsp;
+      %td= submit_tag "Save", :class => "button"

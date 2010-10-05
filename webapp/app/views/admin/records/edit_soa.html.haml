@@ -1,0 +1,69 @@
+%p.navpath
+  = link_to 'Domains', admin_domains_url
+  \&raquo;
+  \#{link_to h(@domain.name), admin_domain_url(@domain)} &raquo;
+  \#{link_to h(@record.fqdn_name), edit_admin_domain_record_url(@domain.id, @record)}
+%h1 Edit SOA record
+%p
+  Fields labeled in
+  %b bold
+  are required.
+= form_for(:record, :url => admin_domain_record_url(@domain.id, @record), :html => { :method => :put }) do |f|
+  %table.edit
+    %tr
+      %th
+        %label.required{:for => "record_name"} Name:
+      %td= f.text_field :name
+      %td= @record.errors[:name].first
+    %tr
+      %th
+        %label.required{:for => "record_ttl"} TTL:
+      %td= f.text_field :ttl
+      %td= @record.errors[:ttl].first
+    %tr
+      %th
+        %label.required{:for => "record_type"} Type:
+      %td= f.select :type, Record::TYPES
+      %td= @record.errors[:type].first
+    %tr
+      %th
+        %label.required{:for => "record_mname"} Origin:
+      %td= f.text_field :mname
+      %td= @record.errors[:mname].first
+    %tr
+      %th
+        %label.required{:for => "record_rname"} Person:
+      %td= f.text_field :rname
+      %td= @record.errors[:rname].first
+    %tr
+      %td &nbsp;
+    %tr
+      %th
+        %label.required{:for => "record_serial"} Serial:
+      %td= f.text_field :serial
+      %td= @record.errors[:serial].first
+    %tr
+      %td &nbsp;
+    %tr
+      %th
+        %label.required{:for => "record_refresh"} Refresh:
+      %td= f.text_field :refresh
+      %td= @record.errors[:refresh].first
+    %tr
+      %th
+        %label.required{:for => "record_retry"} Retry:
+      %td= f.text_field :retry
+      %td= @record.errors[:retry].first
+    %tr
+      %th
+        %label.required{:for => "record_expire"} Expire:
+      %td= f.text_field :expire
+      %td= @record.errors[:expire].first
+    %tr
+      %th
+        %label.required{:for => "record_minimum"} Minimum:
+      %td= f.text_field :minimum
+      %td= @record.errors[:minimum].first
+    %tr
+      %th &nbsp;
+      %td= submit_tag "Save", :class => "button"

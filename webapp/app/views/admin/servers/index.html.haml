@@ -1,0 +1,10 @@
+%p.navpath
+  = link_to 'Servers', admin_servers_url
+%h1 Servers
+%table.listing
+  %tr
+    %th Name
+    %th Action
+  = render :partial => 'servers'
+.add
+  %p= link_to 'New server', new_admin_server_url

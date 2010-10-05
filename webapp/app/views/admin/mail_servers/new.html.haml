@@ -1,0 +1,29 @@
+%p.navpath
+  = link_to 'Defaults', admin_default_url(@default)
+  \&raquo;
+  \#{link_to 'new mail server', new_admin_default_mail_server_url(@default.id)}
+%h1 New mail server
+%p
+  Fields labeled in
+  %b bold
+  are required.
+= form_for(:mail_server, :url => admin_default_mail_servers_url(@default.id)) do |f|
+  %table.edit
+    %tr
+      %th
+        %label.required{:for => "mail_server_name"} Fqdn:
+      %td= f.text_field :fqdn
+      %td= @mail_server.errors[:fqdn].first
+    %tr
+      %th
+        %label.required{:for => "mail_server_pref"} Preference:
+      %td= f.text_field :pref
+      %td= @mail_server.errors[:pref].first
+    %tr
+      %th
+        %label{:for => "mail_server_ttl"} TTL:
+      %td= f.text_field :ttl
+      %td= @mail_server.errors[:ttl].first
+    %tr
+      %th &nbsp;
+      %td= submit_tag "Save", :class => "button"

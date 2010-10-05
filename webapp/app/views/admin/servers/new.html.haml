@@ -1,0 +1,29 @@
+%p.navpath
+  = link_to 'Servers', admin_servers_url
+  \&raquo;
+  \#{link_to 'new', new_admin_server_url}
+%h1 New server
+%p
+  Fields labeled in
+  %b bold
+  are required.
+= form_for(:server, :url => admin_servers_url) do |form|
+  %table.edit
+    %tr
+      %th
+        %label.required{:for => "server_servername"} Servername:
+      %td= form.text_field :servername
+      %td= @server.errors[:servername].first
+    %tr
+      %th
+        %label.required{:for => "server_password"} Password:
+      %td= form.password_field :password
+      %td= @server.errors[:password].first
+    %tr
+      %th
+        %label.required{:for => "server_password_confirmation"} Confirm:
+      %td= form.password_field :password_confirmation
+      %td= @server.errors[:password_confirmation].first
+    %tr
+      %th &nbsp;
+      %td= submit_tag "Save", :class => "button"

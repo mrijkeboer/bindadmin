@@ -1,0 +1,17 @@
+%p.navpath
+  = link_to 'Servers', admin_servers_url
+  \&raquo;
+  \#{link_to h(@server.servername), admin_server_url(@server)}
+%h1 Server
+%table.show
+  %tr
+    %th Servername
+    %td= h @server.servername
+    %td
+      .edit= link_to 'Edit', edit_admin_server_url(@server)
+  %tr
+    %th Created
+    %td= @server.created_at.strftime('%Y-%m-%d %H:%M')
+  %tr
+    %th Changed
+    %td= @server.updated_at.strftime('%Y-%m-%d %H:%M')

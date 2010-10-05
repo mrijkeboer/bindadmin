@@ -1,0 +1,12 @@
+%p.navpath
+  = link_to 'Domains', owner_domains_url
+%h1 Domains
+%table.listing
+  %tr
+    %th Name
+    %th Type
+    %th Owner
+    %th Created
+    %th Last updated
+    %th Action
+  = render :partial => 'domains'

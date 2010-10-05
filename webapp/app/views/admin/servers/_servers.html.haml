@@ -1,0 +1,9 @@
+- for server in @servers
+  %tr
+    %td.servernameColumn
+      = link_to h(server.servername), admin_server_url(server)
+    %td.actionsColumn
+      = link_to 'Details', admin_server_url(server)
+      ,
+      \#{link_to 'Edit', edit_admin_server_url(server)},
+      \#{link_to 'Delete', admin_server_url(server), :method => :delete}
