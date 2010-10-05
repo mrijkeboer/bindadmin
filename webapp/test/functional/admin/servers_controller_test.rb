@@ -20,7 +20,7 @@ class Admin::ServersControllerTest < ActionController::TestCase
 
 
 	test "on GET to :index should render servers" do
-		get :index, nil, {:admin_id => @admin.id}
+		get :index, nil, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :index
 		assert_not_nil assigns(:servers)
@@ -38,7 +38,7 @@ class Admin::ServersControllerTest < ActionController::TestCase
 
 
 	test "on GET to :show should render show" do
-		get :show, {:id => @server.id}, {:admin_id => @admin.id}
+		get :show, {:id => @server.id}, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :show
 		assert_not_nil assigns(:server)
@@ -56,7 +56,7 @@ class Admin::ServersControllerTest < ActionController::TestCase
 
 
 	test "on GET to :new should render new" do
-		get :new, nil, {:admin_id => @admin.id}
+		get :new, nil, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :new
 		assert_not_nil assigns(:server)
@@ -74,7 +74,7 @@ class Admin::ServersControllerTest < ActionController::TestCase
 
 
 	test "on GET to :edit should render edit" do
-		get :edit, {:id => @server.id}, {:admin_id => @admin.id}
+		get :edit, {:id => @server.id}, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :edit
 		assert_not_nil assigns(:server)
@@ -95,7 +95,7 @@ class Admin::ServersControllerTest < ActionController::TestCase
 		@server.delete
 
 		assert_difference("Server.count", 1) do
-			post :create, {:server => Factory.server_attributes}, {:admin_id => @admin.id}
+			post :create, {:server => Factory.server_attributes}, {:user_id => @admin.id}
 		end
 
 		assert_equal "Server created.", flash[:notice]
@@ -113,7 +113,7 @@ class Admin::ServersControllerTest < ActionController::TestCase
 
 
 	test "on PUT to :update should update server" do
-		put :update, {:id => @server.id}, {:admin_id => @admin.id}, :server => { }
+		put :update, {:id => @server.id}, {:user_id => @admin.id}, :server => { }
 		assert_redirected_to admin_servers_path
 		assert_equal "Server updated.", flash[:notice]
 	end
@@ -131,7 +131,7 @@ class Admin::ServersControllerTest < ActionController::TestCase
 
 	test "on DELETE to :destroy should delete server" do
 		assert_difference("Server.count", -1) do
-			delete :destroy, {:id => @server.id}, {:admin_id => @admin.id}
+			delete :destroy, {:id => @server.id}, {:user_id => @admin.id}
 		end
 
 		assert_redirected_to admin_servers_path

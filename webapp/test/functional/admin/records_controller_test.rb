@@ -21,7 +21,7 @@ class Admin::RecordsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :index should redirect to domains" do
-		get :index, {:domain_id => @domain.id}, {:admin_id => @admin.id}
+		get :index, {:domain_id => @domain.id}, {:user_id => @admin.id}
 		assert_redirected_to admin_domain_path(@domain)
 	end
 
@@ -37,7 +37,7 @@ class Admin::RecordsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :show should redirect to domains" do
-		get :show, {:domain_id => @domain.id, :id => @record.id}, {:admin_id => @admin.id}
+		get :show, {:domain_id => @domain.id, :id => @record.id}, {:user_id => @admin.id}
 		assert_redirected_to admin_domain_path(@domain)
 	end
 
@@ -53,7 +53,7 @@ class Admin::RecordsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :new should render new" do
-		get :new, {:domain_id => @domain.id}, {:admin_id => @admin.id}
+		get :new, {:domain_id => @domain.id}, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :new
 		assert_not_nil assigns(:record)
@@ -71,7 +71,7 @@ class Admin::RecordsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :edit should render edit" do
-		get :edit, {:domain_id => @domain.id, :id => @record.id}, {:admin_id => @admin.id}
+		get :edit, {:domain_id => @domain.id, :id => @record.id}, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :edit
 		assert_not_nil assigns(:record)
@@ -90,7 +90,7 @@ class Admin::RecordsControllerTest < ActionController::TestCase
 
 	test "on POST to :create should create record" do
 		assert_difference("Domain.find(\"#{@domain.id}\").records.count", 1) do
-			post :create, {:domain_id => @domain.id, :record => Factory.record_attributes}, {:admin_id => @admin.id}
+			post :create, {:domain_id => @domain.id, :record => Factory.record_attributes}, {:user_id => @admin.id}
 		end
 
 		assert_equal "Record added.", flash[:notice]
@@ -108,7 +108,7 @@ class Admin::RecordsControllerTest < ActionController::TestCase
 
 
 	test "on PUT to :update should update record" do
-		put :update, {:domain_id => @domain.id, :id => @record.id}, {:admin_id => @admin.id}, :record => { }
+		put :update, {:domain_id => @domain.id, :id => @record.id}, {:user_id => @admin.id}, :record => { }
 		assert_redirected_to admin_domain_path(@domain)
 		assert_equal "Record updated.", flash[:notice]
 	end
@@ -126,7 +126,7 @@ class Admin::RecordsControllerTest < ActionController::TestCase
 
 	test "on DELETE to :destroy should delete record" do
 		assert_difference("Domain.find(\"#{@domain.id}\").records.count", -1) do
-			delete :destroy, {:domain_id => @domain.id, :id => @record.id}, {:admin_id => @admin.id}
+			delete :destroy, {:domain_id => @domain.id, :id => @record.id}, {:user_id => @admin.id}
 		end
 
 		assert_redirected_to admin_domain_path(@domain)

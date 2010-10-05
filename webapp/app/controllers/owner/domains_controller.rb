@@ -4,14 +4,14 @@ class Owner::DomainsController < ApplicationController
 
   # GET /owner/domains
   def index
-    @domains = @owner.domains.all
+    @domains = current_user.domains.all
     # index.html.erb
   end
 
 
   # GET /owner/domains/1
   def show
-		@domain = @owner.domains.find(params[:id])
+		@domain = current_user.domains.find(params[:id])
   end
 
 

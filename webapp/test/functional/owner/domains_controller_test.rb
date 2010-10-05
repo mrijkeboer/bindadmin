@@ -20,7 +20,7 @@ class Owner::DomainsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :index should render domains" do
-		get :index, nil, {:owner_id => @owner.id}
+		get :index, nil, {:user_id => @owner.id}
 		assert_response :success
 		assert_template :index
 		assert_not_nil assigns(:domains)
@@ -38,7 +38,7 @@ class Owner::DomainsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :show should render show" do
-		get :show, {:id => @domain.id}, {:owner_id => @owner.id}
+		get :show, {:id => @domain.id}, {:user_id => @owner.id}
 		assert_response :success
 		assert_template :show
 		assert_not_nil assigns(:domain)
@@ -56,7 +56,7 @@ class Owner::DomainsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :new should redirect to domains" do
-		get :new, nil, {:owner_id => @owner.id}
+		get :new, nil, {:user_id => @owner.id}
 		assert_redirected_to owner_domains_path
 	end
 
@@ -72,7 +72,7 @@ class Owner::DomainsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :edit should redirect to domains" do
-		get :edit, {:id => @domain.id}, {:owner_id => @owner.id}
+		get :edit, {:id => @domain.id}, {:user_id => @owner.id}
 		assert_redirected_to owner_domains_path
 	end
 
@@ -88,7 +88,7 @@ class Owner::DomainsControllerTest < ActionController::TestCase
 
 
 	test "on POST to :create should redirect to domains" do
-		post :create, {:domain => Factory.domain_attributes}, {:owner_id => @owner.id}
+		post :create, {:domain => Factory.domain_attributes}, {:user_id => @owner.id}
 		assert_redirected_to owner_domains_path
 	end
 
@@ -104,7 +104,7 @@ class Owner::DomainsControllerTest < ActionController::TestCase
 
 
 	test "on PUT to :update should redirect to domains" do
-		put :update, {:id => @domain.id}, {:owner_id => @owner.id}, :domain => { }
+		put :update, {:id => @domain.id}, {:user_id => @owner.id}, :domain => { }
 		assert_redirected_to owner_domains_path
 	end
 
@@ -120,7 +120,7 @@ class Owner::DomainsControllerTest < ActionController::TestCase
 
 
 	test "on DELETE to :destroy should redirect to domains" do
-		delete :destroy, {:id => @domain.id}, {:owner_id => @owner.id}
+		delete :destroy, {:id => @domain.id}, {:user_id => @owner.id}
 		assert_redirected_to owner_domains_path
 	end
 

@@ -20,7 +20,7 @@ class Admin::DefaultsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :index should redirect to domains" do
-		get :index, nil, {:admin_id => @admin.id}
+		get :index, nil, {:user_id => @admin.id}
 		assert_redirected_to admin_default_path(@default)
 	end
 
@@ -36,7 +36,7 @@ class Admin::DefaultsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :show should render show" do
-		get :show, {:id => @default.id}, {:admin_id => @admin.id}
+		get :show, {:id => @default.id}, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :show
 		assert_not_nil assigns(:default)
@@ -54,7 +54,7 @@ class Admin::DefaultsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :new should redirect to defaults" do
-		get :new, nil, {:admin_id => @admin.id}
+		get :new, nil, {:user_id => @admin.id}
 		assert_redirected_to admin_default_path(@default)
 	end
 
@@ -70,7 +70,7 @@ class Admin::DefaultsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :edit should render edit" do
-		get :edit, {:id => @default.id}, {:admin_id => @admin.id}
+		get :edit, {:id => @default.id}, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :edit
 		assert_not_nil assigns(:default)
@@ -88,7 +88,7 @@ class Admin::DefaultsControllerTest < ActionController::TestCase
 
 
 	test "on POST to :create should redirect to defaults" do
-		post :create, {:default => Factory.default_attributes}, {:admin_id => @admin.id}
+		post :create, {:default => Factory.default_attributes}, {:user_id => @admin.id}
 		assert_redirected_to admin_default_path(@default)
 	end
 
@@ -104,7 +104,7 @@ class Admin::DefaultsControllerTest < ActionController::TestCase
 
 
 	test "on PUT to :update should update default" do
-		put :update, {:id => @default.id}, {:admin_id => @admin.id}, :default => { }
+		put :update, {:id => @default.id}, {:user_id => @admin.id}, :default => { }
 		assert_equal "Default updated.", flash[:notice]
 	end
 
@@ -120,7 +120,7 @@ class Admin::DefaultsControllerTest < ActionController::TestCase
 
 
 	test "on DELETE to :destroy should redirect to defaults" do
-		delete :destroy, {:id => @default.id}, {:admin_id => @admin.id}
+		delete :destroy, {:id => @default.id}, {:user_id => @admin.id}
 		assert_redirected_to admin_default_path(@default)
 	end
 

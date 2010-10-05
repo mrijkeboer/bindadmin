@@ -20,7 +20,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
 
 	test "on GET to :index should render users" do
-		get :index, nil, {:admin_id => @admin.id}
+		get :index, nil, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :index
 		assert_not_nil assigns(:users)
@@ -38,7 +38,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
 
 	test "on GET to :show should render show" do
-		get :show, {:id => @user.id}, {:admin_id => @admin.id}
+		get :show, {:id => @user.id}, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :show
 		assert_not_nil assigns(:user)
@@ -56,7 +56,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
 
 	test "on GET to :new should render new" do
-		get :new, nil, {:admin_id => @admin.id}
+		get :new, nil, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :new
 		assert_not_nil assigns(:user)
@@ -85,7 +85,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
 
 	test "on GET to :edit should render edit" do
-		get :edit, {:id => @user.id}, {:admin_id => @admin.id}
+		get :edit, {:id => @user.id}, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :edit
 		assert_not_nil assigns(:user)
@@ -106,7 +106,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
 		@user.delete
 
 		assert_difference("User.count", 1) do
-			post :create, {:user => Factory.user_attributes}, {:admin_id => @admin.id}
+			post :create, {:user => Factory.user_attributes}, {:user_id => @admin.id}
 		end
 
 		assert_equal "User created.", flash[:notice]
@@ -136,7 +136,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
 
 	test "on PUT to :update should update user" do
-		put :update, {:id => @user.id}, {:admin_id => @admin.id}, :user => { }
+		put :update, {:id => @user.id}, {:user_id => @admin.id}, :user => { }
 		assert_redirected_to admin_users_path
 		assert_equal "User updated.", flash[:notice]
 	end
@@ -154,7 +154,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
 	test "on DELETE to :destroy should delete user" do
 		assert_difference("User.count", -1) do
-			delete :destroy, {:id => @user.id}, {:admin_id => @admin.id}
+			delete :destroy, {:id => @user.id}, {:user_id => @admin.id}
 		end
 
 		assert_redirected_to admin_users_path

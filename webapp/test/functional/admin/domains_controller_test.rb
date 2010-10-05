@@ -21,7 +21,7 @@ class Admin::DomainsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :index should render domains" do
-		get :index, nil, {:admin_id => @admin.id}
+		get :index, nil, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :index
 		assert_not_nil assigns(:domains)
@@ -39,7 +39,7 @@ class Admin::DomainsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :show should render show" do
-		get :show, {:id => @domain.id}, {:admin_id => @admin.id}
+		get :show, {:id => @domain.id}, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :show
 		assert_not_nil assigns(:domain)
@@ -57,7 +57,7 @@ class Admin::DomainsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :new should render new" do
-		get :new, nil, {:admin_id => @admin.id}
+		get :new, nil, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :new
 		assert_not_nil assigns(:domain)
@@ -75,7 +75,7 @@ class Admin::DomainsControllerTest < ActionController::TestCase
 
 
 	test "on GET to :edit should render edit" do
-		get :edit, {:id => @domain.id}, {:admin_id => @admin.id}
+		get :edit, {:id => @domain.id}, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :edit
 		assert_not_nil assigns(:domain)
@@ -97,7 +97,7 @@ class Admin::DomainsControllerTest < ActionController::TestCase
 		@user.delete
 
 		assert_difference("Domain.count", 1) do
-			post :create, {:domain => Factory.domain_attributes}, {:admin_id => @admin.id}
+			post :create, {:domain => Factory.domain_attributes}, {:user_id => @admin.id}
 		end
 
 		assert_equal "Domain created.", flash[:notice]
@@ -115,7 +115,7 @@ class Admin::DomainsControllerTest < ActionController::TestCase
 
 
 	test "on PUT to :update should update domain" do
-		put :update, {:id => @domain.id}, {:admin_id => @admin.id}, :domain => { }
+		put :update, {:id => @domain.id}, {:user_id => @admin.id}, :domain => { }
 		assert_redirected_to admin_domains_path
 		assert_equal "Domain updated.", flash[:notice]
 	end
@@ -133,7 +133,7 @@ class Admin::DomainsControllerTest < ActionController::TestCase
 
 	test "on DELETE to :destroy should delete domain" do
 		assert_difference("Domain.count", -1) do
-			delete :destroy, {:id => @domain.id}, {:admin_id => @admin.id}
+			delete :destroy, {:id => @domain.id}, {:user_id => @admin.id}
 		end
 
 		assert_redirected_to admin_domains_path

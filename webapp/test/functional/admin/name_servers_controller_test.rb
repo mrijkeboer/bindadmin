@@ -21,7 +21,7 @@ class Admin::NameServersControllerTest < ActionController::TestCase
 
 
 	test "on GET to :index should redirect to defaults" do
-		get :index, {:default_id => @default.id}, {:admin_id => @admin.id}
+		get :index, {:default_id => @default.id}, {:user_id => @admin.id}
 		assert_redirected_to admin_default_path(@default)
 	end
 
@@ -37,7 +37,7 @@ class Admin::NameServersControllerTest < ActionController::TestCase
 
 
 	test "on GET to :show should redirect to defaults" do
-		get :show, {:default_id => @default.id, :id => @name_server.id}, {:admin_id => @admin.id}
+		get :show, {:default_id => @default.id, :id => @name_server.id}, {:user_id => @admin.id}
 		assert_redirected_to admin_default_path(@default)
 	end
 
@@ -53,7 +53,7 @@ class Admin::NameServersControllerTest < ActionController::TestCase
 
 
 	test "on GET to :new should render new" do
-		get :new, {:default_id => @default.id}, {:admin_id => @admin.id}
+		get :new, {:default_id => @default.id}, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :new
 		assert_not_nil assigns(:name_server)
@@ -71,7 +71,7 @@ class Admin::NameServersControllerTest < ActionController::TestCase
 
 
 	test "on GET to :edit should render edit" do
-		get :edit, {:default_id => @default.id, :id => @name_server.id}, {:admin_id => @admin.id}
+		get :edit, {:default_id => @default.id, :id => @name_server.id}, {:user_id => @admin.id}
 		assert_response :success
 		assert_template :edit
 		assert_not_nil assigns(:name_server)
@@ -90,7 +90,7 @@ class Admin::NameServersControllerTest < ActionController::TestCase
 
 	test "on POST to :create should create name_server" do
 		assert_difference("Default.find(\"#{@default.id}\").name_servers.count", 1) do
-			post :create, {:default_id => @default.id, :name_server => Factory.name_server_attributes}, {:admin_id => @admin.id}
+			post :create, {:default_id => @default.id, :name_server => Factory.name_server_attributes}, {:user_id => @admin.id}
 		end
 
 		assert_equal "Name server added.", flash[:notice]
@@ -108,7 +108,7 @@ class Admin::NameServersControllerTest < ActionController::TestCase
 
 
 	test "on PUT to :update should update name_server" do
-		put :update, {:default_id => @default.id, :id => @name_server.id}, {:admin_id => @admin.id}, :name_server => { }
+		put :update, {:default_id => @default.id, :id => @name_server.id}, {:user_id => @admin.id}, :name_server => { }
 		assert_redirected_to admin_default_path(@default)
 		assert_equal "Name server updated.", flash[:notice]
 	end
@@ -126,7 +126,7 @@ class Admin::NameServersControllerTest < ActionController::TestCase
 
 	test "on DELETE to :destroy should delete name_server" do
 		assert_difference("Default.find(\"#{@default.id}\").name_servers.count", -1) do
-			delete :destroy, {:default_id => @default.id, :id => @name_server.id}, {:admin_id => @admin.id}
+			delete :destroy, {:default_id => @default.id, :id => @name_server.id}, {:user_id => @admin.id}
 		end
 
 		assert_redirected_to admin_default_path(@default)

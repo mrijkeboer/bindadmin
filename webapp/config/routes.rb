@@ -1,9 +1,11 @@
 BindAdmin::Application.routes.draw do
 
-	root :to => 'welcome#index'
+	root :to => 'sessions#new'
 	
-	match '/sign_in',  :to => 'welcome#sign_in'
-	match '/sign_out', :to => 'welcome#sign_out'
+	match '/sign_in',  :to => 'sessions#new'
+	match '/sign_out', :to => 'sessions#destroy'
+
+	resources :sessions, :only => [:new, :create, :destroy]
 
 
 	namespace :admin do
