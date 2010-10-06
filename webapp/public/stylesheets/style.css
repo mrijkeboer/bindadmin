@@ -248,7 +248,7 @@ body {
 	background-color: #4c4c4c
 }
 
-.formError {
+.error {
 	color: #ff0000;
 	font-weight: bold;
 	margin-left: 10px;

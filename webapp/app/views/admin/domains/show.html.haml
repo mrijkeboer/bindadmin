@@ -1,13 +1,13 @@
 %p.navpath
   = link_to 'Domains', admin_domains_url
   \&raquo;
-  \#{link_to h(@domain.name), admin_domain_url(@domain)}
+  = link_to h(@domain.name), admin_domain_url(@domain)
+
 %h1 Domain
 %table.show
   %tr
     %th Name
-    %td
-      = h(@domain.name)
+    %td= h(@domain.name)
     %td
       .edit= link_to 'Edit', edit_admin_domain_url(@domain)
   %tr
@@ -16,8 +16,7 @@
     - if @domain.slave?
       %tr
         %th Master
-        %td
-          = h @domain.master
+        %td= h @domain.master
   %tr
     %th Owner
     %td= h @domain.owner
@@ -27,7 +26,9 @@
   %tr
     %th Last updated
     %td= h(@domain.updated_at.strftime('%Y-%m-%d %H:%M'))
+
 %hr/
+
 - if @domain.native?
   %table.show
     - counter = 0
@@ -37,8 +38,7 @@
           %th Records
         - else
           %th &nbsp;
-        %td
-          = h(record.name)
+        %td= h(record.name)
         %td
           - if record.ttl
             = h(record.ttl)
@@ -50,12 +50,11 @@
             (#{h(record.pref)})
           - else
             = h(record.type)
-        %td
-          = h(record.content)
+        %td= h(record.content)
         %td
           .edit
             = link_to 'Edit', edit_admin_domain_record_url(@domain.id, record)
-            ,
+            \&nbsp;
             = link_to 'Delete', admin_domain_record_url(@domain.id, record), :method => 'delete'
         - counter += 1
     %tr
@@ -65,7 +64,9 @@
         %th &nbsp;
       %td
         .add= link_to 'Add a record', new_admin_domain_record_url(@domain.id)
+
 %hr/
+
 %table.show
   - counter = 0
   - for query in @domain.allow_queries
@@ -78,7 +79,7 @@
       %td
         .edit
           = link_to 'Edit', edit_admin_domain_allow_query_url(@domain.id, query)
-          ,
+          \&nbsp;
           = link_to 'Delete', admin_domain_allow_query_url(@domain.id, query), :method => 'delete'
     - counter += 1
   %tr

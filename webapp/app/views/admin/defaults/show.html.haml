@@ -1,5 +1,6 @@
 %p.navpath
   = link_to 'Defaults', admin_default_url(@default)
+
 %h1 Defaults
 %table.show
   %tr
@@ -29,7 +30,9 @@
   %tr
     %th Minimum
     %td= h(@default.minimum)
+
 %hr/
+
 %table.show
   - counter = 0
   - for name_server in @default.name_servers
@@ -43,9 +46,9 @@
       %td
         .edit
           = link_to 'Edit', edit_admin_default_name_server_url(@default.id, name_server)
-          ,
-          \#{link_to 'Delete', admin_default_name_server_url(@default.id, name_server), :method => 'delete'}
-  - counter += 1
+          \&nbsp;
+          = link_to 'Delete', admin_default_name_server_url(@default.id, name_server), :method => 'delete'
+      - counter += 1
   %tr
     - if counter == 0
       %th Name servers
@@ -53,7 +56,9 @@
       %th &nbsp;
     %td
       .add= link_to 'Add a name server', new_admin_default_name_server_url(@default.id)
+
 %hr/
+
 %table.show
   - counter = 0
   - for mail_server in @default.mail_servers
@@ -68,9 +73,9 @@
       %td
         .edit
           = link_to 'Edit', edit_admin_default_mail_server_url(@default.id, mail_server)
-          ,
-          \#{link_to 'Delete', admin_default_mail_server_url(@default.id, mail_server), :method => 'delete'}
-  - counter += 1
+          \&nbsp;
+          = link_to 'Delete', admin_default_mail_server_url(@default.id, mail_server), :method => 'delete'
+      - counter += 1
   %tr
     - if counter == 0
       %th Mail servers

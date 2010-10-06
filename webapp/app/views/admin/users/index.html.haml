@@ -1,5 +1,6 @@
 %p.navpath
   = link_to 'Users', admin_users_url
+
 %h1 Users
 %table.listing
   %tr
@@ -7,6 +8,19 @@
     %th Role
     %th Username
     %th Action
-  = render :partial => 'users'
+  - for user in @users
+    %tr
+      %td
+        = link_to h(user.fullname), admin_user_url(user)
+      %td
+        = h(user.role)
+      %td
+        = h(user.username)
+      %td
+        = link_to 'Details', admin_user_url(user)
+        \&nbsp;
+        = link_to 'Edit', edit_admin_user_url(user)
+        \&nbsp;
+        = link_to 'Delete', admin_user_url(user), :method => :delete
 .add
   %p= link_to 'New user', new_admin_user_url

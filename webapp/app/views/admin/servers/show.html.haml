@@ -1,7 +1,8 @@
 %p.navpath
   = link_to 'Servers', admin_servers_url
   \&raquo;
-  \#{link_to h(@server.servername), admin_server_url(@server)}
+  = link_to h(@server.servername), admin_server_url(@server)
+
 %h1 Server
 %table.show
   %tr

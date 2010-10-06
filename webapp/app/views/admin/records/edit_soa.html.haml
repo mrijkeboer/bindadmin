@@ -1,8 +1,10 @@
 %p.navpath
   = link_to 'Domains', admin_domains_url
   \&raquo;
-  \#{link_to h(@domain.name), admin_domain_url(@domain)} &raquo;
-  \#{link_to h(@record.fqdn_name), edit_admin_domain_record_url(@domain.id, @record)}
+  = link_to h(@domain.name), admin_domain_url(@domain)
+  \&raquo;
+  = link_to h(@record.fqdn_name), edit_admin_domain_record_url(@domain.id, @record)
+
 %h1 Edit SOA record
 %p
   Fields labeled in
@@ -11,59 +13,49 @@
 = form_for(:record, :url => admin_domain_record_url(@domain.id, @record), :html => { :method => :put }) do |f|
   %table.edit
     %tr
-      %th
-        %label.required{:for => "record_name"} Name:
+      %th= f.label :name, "Name:", :class => "required"
       %td= f.text_field :name
-      %td= @record.errors[:name].first
+      %td.error= @record.errors[:name].first
     %tr
-      %th
-        %label.required{:for => "record_ttl"} TTL:
+      %th= f.label :ttl, "TTL:", :class => "required"
       %td= f.text_field :ttl
-      %td= @record.errors[:ttl].first
+      %td.error= @record.errors[:ttl].first
     %tr
-      %th
-        %label.required{:for => "record_type"} Type:
+      %th= f.label :type, "Type:", :class => "required"
       %td= f.select :type, Record::TYPES
-      %td= @record.errors[:type].first
+      %td.error= @record.errors[:type].first
     %tr
-      %th
-        %label.required{:for => "record_mname"} Origin:
+      %th= f.label :mname, "Origin:", :class => "required"
       %td= f.text_field :mname
-      %td= @record.errors[:mname].first
+      %td.error= @record.errors[:mname].first
     %tr
-      %th
-        %label.required{:for => "record_rname"} Person:
+      %th= f.label :rname, "Person:", :class => "required"
       %td= f.text_field :rname
-      %td= @record.errors[:rname].first
+      %td.error= @record.errors[:rname].first
     %tr
       %td &nbsp;
     %tr
-      %th
-        %label.required{:for => "record_serial"} Serial:
+      %th= f.label :serial, "Serial:", :class => "required"
       %td= f.text_field :serial
-      %td= @record.errors[:serial].first
+      %td.error= @record.errors[:serial].first
     %tr
       %td &nbsp;
     %tr
-      %th
-        %label.required{:for => "record_refresh"} Refresh:
+      %th= f.label :refresh, "Refresh:", :class => "required"
       %td= f.text_field :refresh
-      %td= @record.errors[:refresh].first
+      %td.error= @record.errors[:refresh].first
     %tr
-      %th
-        %label.required{:for => "record_retry"} Retry:
+      %th= f.label :retry, "Retry:", :class => "required"
       %td= f.text_field :retry
-      %td= @record.errors[:retry].first
+      %td.error= @record.errors[:retry].first
     %tr
-      %th
-        %label.required{:for => "record_expire"} Expire:
+      %th= f.label :expire, "Expire:", :class => "required"
       %td= f.text_field :expire
-      %td= @record.errors[:expire].first
+      %td.error= @record.errors[:expire].first
     %tr
-      %th
-        %label.required{:for => "record_minimum"} Minimum:
+      %th= f.label :minimum, "Minimum:", :class => "required"
       %td= f.text_field :minimum
-      %td= @record.errors[:minimum].first
+      %td.error= @record.errors[:minimum].first
     %tr
       %th &nbsp;
-      %td= submit_tag "Save", :class => "button"
+      %td= f.submit "Save", :class => "button"

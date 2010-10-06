@@ -1,44 +1,40 @@
 %p.navpath
   = link_to 'Domains', admin_domains_url
   \&raquo;
-  \#{link_to h(@domain.name), admin_domain_url(@domain)} &raquo;
-  \#{link_to h(@record.fqdn_name), edit_admin_domain_record_url(@domain.id, @record)}
+  = link_to h(@domain.name), admin_domain_url(@domain)
+  \&raquo;
+  = link_to h(@record.fqdn_name), edit_admin_domain_record_url(@domain.id, @record)
+
 %h1 Edit record
 %p
   Fields labeled in
   %b bold
   are required.
-= form_for(:record, :url => admin_domain_record_url(@domain.id, @record), :html => { :method => :put }) do |form|
+= form_for(:record, :url => admin_domain_record_url(@domain.id, @record), :html => { :method => :put }) do |f|
   %table.edit
     %tr
-      %th
-        %label.required{:for => "record_name"} Name:
-      %td= form.text_field :name
-      %td= @record.errors[:name].first
+      %th= f.label :name, "Name:", :class => "required"
+      %td= f.text_field :name
+      %td.error= @record.errors[:name].first
     %tr
-      %th
-        %label{:for => "record_ttl"} TTL:
-      %td= form.text_field :ttl, :class => 'text'
-      %td= @record.errors[:ttl].first
+      %th= f.label :ttl, "TTL:"
+      %td= f.text_field :ttl, :class => 'text'
+      %td.error= @record.errors[:ttl].first
     %tr
-      %th
-        %label.required{:for => "record_ype"} Type:
-      %td= form.select :type, Record::TYPES
+      %th= f.label :type, "Type:", :class => "required"
+      %td= f.select :type, Record::TYPES
     %tr
-      %th
-        %label{:for => "record_pref"} Preference:
-      %td= form.text_field :pref, :class => 'text'
-      %td= @record.errors[:pref].first
+      %th= f.label :pref, "Preference:"
+      %td= f.text_field :pref, :class => 'text'
+      %td.error= @record.errors[:pref].first
     %tr
-      %th
-        %label.required{:for => "record_content"} Content:
-      %td= form.text_field :content, :class => 'text'
-      %td= @record.errors[:content].first
+      %th= f.label :content, "Content:", :class => "required"
+      %td= f.text_field :content, :class => 'text'
+      %td.error= @record.errors[:content].first
     %tr
-      %th
-        %label{:for => "record_locked"} Locked:
-      %td= form.check_box :locked
-      %td= @record.errors[:locked].first
+      %th= f.label :locked, "Locked:", :class => "required"
+      %td= f.check_box :locked
+      %td.error= @record.errors[:locked].first
     %tr
       %th &nbsp;
-      %td= submit_tag "Save", :class => "button"
+      %td= f.submit "Save", :class => "button"

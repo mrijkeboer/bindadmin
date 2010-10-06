@@ -1,8 +1,10 @@
 %p.navpath
   = link_to 'Domains', owner_domains_url
   \&raquo;
-  \#{link_to h(@domain.name), owner_domain_url(@domain)} &raquo;
-  \#{link_to 'new record', new_owner_domain_record_url(@domain.id)}
+  = link_to h(@domain.name), owner_domain_url(@domain)
+  \&raquo;
+  = link_to 'new record', new_owner_domain_record_url(@domain.id)
+
 %h1 New record
 %p
   Fields labeled in
@@ -11,30 +13,25 @@
 = form_for(:record, :url => owner_domain_records_url(@domain.id)) do |f|
   %table.edit
     %tr
-      %th
-        %label.required{:for => "record_name"} Name:
+      %th= f.label :name, "Name:", :class => "required"
       %td= f.text_field :name
-      %td= @record.errors[:name].first
+      %td.error= @record.errors[:name].first
     %tr
-      %th
-        %label{:for => "record_ttl"} TTL:
+      %th= f.label :ttl, "TTL:"
       %td= f.text_field :ttl
-      %td= @record.errors[:ttl].first
+      %td.error= @record.errors[:ttl].first
     %tr
-      %th
-        %label.required{:for => "record_type"} Type:
+      %th= f.label :type, "Type:", :class => "required"
       %td= f.select :type, Record::OWNER_TYPES
-      %td= @record.errors[:type].first
+      %td.error= @record.errors[:type].first
     %tr
-      %th
-        %label{:for => "record_pref"} Preference:
+      %th= f.label :pref, "Preference:"
       %td= f.text_field :pref
-      %td= @record.errors[:pref].first
+      %td.error= @record.errors[:pref].first
     %tr
-      %th
-        %label.required{:for => "record_content"} Content:
+      %th= f.label :content, "Content:", :class => "required"
       %td= f.text_field :content
-      %td= @record.errors[:content].first
+      %td.error= @record.errors[:content].first
     %tr
       %th &nbsp;
-      %td= submit_tag "Save", :class => "button"
+      %td= f.submit "Save", :class => "button"

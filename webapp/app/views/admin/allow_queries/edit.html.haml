@@ -1,28 +1,28 @@
 %p.navpath
   = link_to 'Domains', admin_domains_url
   \&raquo;
-  \#{link_to h(@domain.name), admin_domain_url(@domain)} &raquo;
-  \#{link_to h(@allow_query.name), edit_admin_domain_allow_query_url(@domain.id, @allow_query)}
+  = link_to h(@domain.name), admin_domain_url(@domain)
+  \&raquo;
+  = link_to h(@allow_query.name), edit_admin_domain_allow_query_url(@domain.id, @allow_query)
+
 %h1 Edit allow query
 %p
   Fields labeled in
   %b bold
   are required.
-= form_for(:allow_query, :url => admin_domain_allow_query_url(@domain.id, @allow_query), :html => { :method => :put }) do |form|
+= form_for(:allow_query, :url => admin_domain_allow_query_url(@domain.id, @allow_query), :html => { :method => :put }) do |f|
   %table.edit
     %tr
-      %th
-        %label.required{:for => "allow_query_name"} Name:
-      %td= form.text_field :name
-      %td= @allow_query.errors[:name].first
+      %th= f.label :name, "Name:", :class => "required"
+      %td= f.text_field :name
+      %td.error= @allow_query.errors[:name].first
     %tr
-      %th
-        %label.required{:for => "allow_query_clients"} Clients:
+      %th= f.label :clients, "Clients", :class => "required"
       %td One per line:
     %tr
       %th &nbsp;
-      %td= form.text_area :clients, :cols => 40
-      %td= @allow_query.errors[:clients].first
+      %td= f.text_area :clients, :cols => 40
+      %td.error= @allow_query.errors[:clients].first
     %tr
       %th &nbsp;
-      %td= submit_tag "Save", :class => "button"
+      %td= f.submit "Save", :class => "button"

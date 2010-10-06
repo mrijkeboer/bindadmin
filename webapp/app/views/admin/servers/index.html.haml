@@ -1,10 +1,20 @@
 %p.navpath
   = link_to 'Servers', admin_servers_url
+
 %h1 Servers
 %table.listing
   %tr
     %th Name
     %th Action
-  = render :partial => 'servers'
+  - for server in @servers
+    %tr
+      %td
+        = link_to h(server.servername), admin_server_url(server)
+      %td
+        = link_to 'Details', admin_server_url(server)
+        \&nbsp;
+        = link_to 'Edit', edit_admin_server_url(server)
+        \&nbsp;
+        = link_to 'Delete', admin_server_url(server), :method => :delete
 .add
   %p= link_to 'New server', new_admin_server_url

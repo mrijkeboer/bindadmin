@@ -1,29 +1,27 @@
 %p.navpath
   = link_to 'Defaults', admin_default_url(@default)
   \&raquo;
-  \#{link_to h(@mail_server.fqdn), edit_admin_default_mail_server_url(@default.id, @mail_server)}
+  = link_to h(@mail_server.fqdn), edit_admin_default_mail_server_url(@default.id, @mail_server)
+
 %h1 Edit mail server
 %p
   Fields labeled in
   %b bold
   are required.
-= form_for(:mail_server, :url => admin_default_mail_server_url(@default.id, @mail_server), :html => { :method => :put }) do |form|
+= form_for(:mail_server, :url => admin_default_mail_server_url(@default.id, @mail_server), :html => { :method => :put }) do |f|
   %table.edit
     %tr
-      %th
-        %label.required{:for => "mail_server_fqdn"} Fqdn:
-      %td= form.text_field :fqdn
-      %td= @mail_server.errors[:fqdn].first
+      %th= f.label :fqdn, "Fqdn:", :class => "required"
+      %td= f.text_field :fqdn
+      %td.error= @mail_server.errors[:fqdn].first
     %tr
-      %th
-        %label.required{:for => "mail_server_pref"} Preference:
-      %td= form.text_field :pref, :class => 'text'
-      %td= @mail_server.errors[:pref].first
+      %th= f.label :pref, "Preference:", :class => "required"
+      %td= f.text_field :pref, :class => 'text'
+      %td.error= @mail_server.errors[:pref].first
     %tr
-      %th
-        %label{:for => "mail_server_ttl"} TTL:
-      %td= form.text_field :ttl, :class => 'text'
-      %td= @mail_server.errors[:ttl].first
+      %th= f.label :ttl, "TTL:"
+      %td= f.text_field :ttl, :class => 'text'
+      %td.error= @mail_server.errors[:ttl].first
     %tr
       %th &nbsp;
-      %td= submit_tag "Save", :class => "button"
+      %td= f.submit "Save", :class => "button"
