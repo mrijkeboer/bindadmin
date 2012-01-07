@@ -6,14 +6,14 @@ class RecordTest < ActiveSupport::TestCase
 	# name
 	#
 	test "ensure presence of name" do
-		assert_nil_not_valid(Record.new(:type => 'A'), :name)
-		assert_nil_not_valid(Record.new(:type => 'AAAA'), :name)
-		assert_nil_not_valid(Record.new(:type => 'CNAME'), :name)
-		assert_nil_not_valid(Record.new(:type => 'MX'), :name)
-		assert_nil_not_valid(Record.new(:type => 'NS'), :name)
-		assert_nil_not_valid(Record.new(:type => 'PTR'), :name)
-		assert_nil_not_valid(Record.new(:type => 'SOA'), :name)
-		assert_nil_not_valid(Record.new(:type => 'TXT'), :name)
+		assert_nil_not_valid(Record.new(:rectype => 'A'), :name)
+		assert_nil_not_valid(Record.new(:rectype => 'AAAA'), :name)
+		assert_nil_not_valid(Record.new(:rectype => 'CNAME'), :name)
+		assert_nil_not_valid(Record.new(:rectype => 'MX'), :name)
+		assert_nil_not_valid(Record.new(:rectype => 'NS'), :name)
+		assert_nil_not_valid(Record.new(:rectype => 'PTR'), :name)
+		assert_nil_not_valid(Record.new(:rectype => 'SOA'), :name)
+		assert_nil_not_valid(Record.new(:rectype => 'TXT'), :name)
 	end
 
 
@@ -34,36 +34,36 @@ class RecordTest < ActiveSupport::TestCase
 
 
 	#
-	# type
+	# rectype
 	#
-	test "ensure presence of type" do
-		assert_nil_not_valid(Record.new, :type)
+	test "ensure presence of rectype" do
+		assert_nil_not_valid(Record.new, :rectype)
 	end
 
 
-	test "ensure type a valid domain type" do
-		assert_valid_value(Record.new, :type, 'A')
-		assert_valid_value(Record.new, :type, 'AAAA')
-		assert_valid_value(Record.new, :type, 'CNAME')
-		assert_valid_value(Record.new, :type, 'MX')
-		assert_valid_value(Record.new, :type, 'NS')
-		assert_valid_value(Record.new, :type, 'PTR')
-		assert_valid_value(Record.new, :type, 'SOA')
-		assert_valid_value(Record.new, :type, 'TXT')
+	test "ensure rectype a valid record type" do
+		assert_valid_value(Record.new, :rectype, 'A')
+		assert_valid_value(Record.new, :rectype, 'AAAA')
+		assert_valid_value(Record.new, :rectype, 'CNAME')
+		assert_valid_value(Record.new, :rectype, 'MX')
+		assert_valid_value(Record.new, :rectype, 'NS')
+		assert_valid_value(Record.new, :rectype, 'PTR')
+		assert_valid_value(Record.new, :rectype, 'SOA')
+		assert_valid_value(Record.new, :rectype, 'TXT')
 
-		assert_valid_value(Record.new, :type, 'a')
-		assert_valid_value(Record.new, :type, 'aaaa')
-		assert_valid_value(Record.new, :type, 'cname')
-		assert_valid_value(Record.new, :type, 'mx')
-		assert_valid_value(Record.new, :type, 'ns')
-		assert_valid_value(Record.new, :type, 'ptr')
-		assert_valid_value(Record.new, :type, 'soa')
-		assert_valid_value(Record.new, :type, 'txt')
+		assert_valid_value(Record.new, :rectype, 'a')
+		assert_valid_value(Record.new, :rectype, 'aaaa')
+		assert_valid_value(Record.new, :rectype, 'cname')
+		assert_valid_value(Record.new, :rectype, 'mx')
+		assert_valid_value(Record.new, :rectype, 'ns')
+		assert_valid_value(Record.new, :rectype, 'ptr')
+		assert_valid_value(Record.new, :rectype, 'soa')
+		assert_valid_value(Record.new, :rectype, 'txt')
 
-		assert_not_valid_value(Record.new, :type, 'b')
-		assert_not_valid_value(Record.new, :type, 'aaa')
-		assert_not_valid_value(Record.new, :type, 'c')
-		assert_not_valid_value(Record.new, :type, 2)
+		assert_not_valid_value(Record.new, :rectype, 'b')
+		assert_not_valid_value(Record.new, :rectype, 'aaa')
+		assert_not_valid_value(Record.new, :rectype, 'c')
+		assert_not_valid_value(Record.new, :rectype, 2)
 	end
 
 
@@ -71,37 +71,37 @@ class RecordTest < ActiveSupport::TestCase
 	# A record
 	#
 	test "ensure valid name for A" do
-		assert_name(Record.new(:type => 'A'), :name)
+		assert_name(Record.new(:rectype => 'A'), :name)
 	end
 
 
 	test "allow nil for ttl for A" do
-		assert_nil_valid(Record.new(:type => 'A'), :ttl)
+		assert_nil_valid(Record.new(:rectype => 'A'), :ttl)
 	end
 
 
 	test "ensure ttl is valid DNS time for A" do
-		assert_times(Record.new(:type => 'A'), :ttl)
+		assert_times(Record.new(:rectype => 'A'), :ttl)
 	end
 
 
 	test "ensure pref is nil for A" do
-		assert_nil_valid(Record.new(:type => 'A'), :pref)
-		assert_not_valid_value(Record.new(:type => 'A'), :pref, 100)
+		assert_nil_valid(Record.new(:rectype => 'A'), :pref)
+		assert_not_valid_value(Record.new(:rectype => 'A'), :pref, 100)
 	end
 
 
 	test "ensure content is valid IPv4 address for A" do
-		assert_valid_value(Record.new(:type => 'A'), :content, '127.0.0.1')
-		assert_not_valid_value(Record.new(:type => 'A'), :content, '127')
-		assert_not_valid_value(Record.new(:type => 'A'), :content, '2001::1')
-		assert_not_valid_value(Record.new(:type => 'A'), :content, 'www')
-		assert_not_valid_value(Record.new(:type => 'A'), :content, 'www.example.com.')
+		assert_valid_value(Record.new(:rectype => 'A'), :content, '127.0.0.1')
+		assert_not_valid_value(Record.new(:rectype => 'A'), :content, '127')
+		assert_not_valid_value(Record.new(:rectype => 'A'), :content, '2001::1')
+		assert_not_valid_value(Record.new(:rectype => 'A'), :content, 'www')
+		assert_not_valid_value(Record.new(:rectype => 'A'), :content, 'www.example.com.')
 	end
 
 
 	test "ensure a? is true" do
-		assert Record.new(:type => 'A').a?
+		assert Record.new(:rectype => 'A').a?
 	end
 
 
@@ -109,36 +109,36 @@ class RecordTest < ActiveSupport::TestCase
 	# AAAA record
 	#
 	test "ensure valid name for AAAA" do
-		assert_name(Record.new(:type => 'AAAA'), :name)
+		assert_name(Record.new(:rectype => 'AAAA'), :name)
 	end
 
 
 	test "allow nil for ttl for AAAA" do
-		assert_nil_valid(Record.new(:type => 'AAAA'), :ttl)
+		assert_nil_valid(Record.new(:rectype => 'AAAA'), :ttl)
 	end
 
 
 	test "ensure ttl is valid DNS time for AAAA" do
-		assert_times(Record.new(:type => 'AAAA'), :ttl)
+		assert_times(Record.new(:rectype => 'AAAA'), :ttl)
 	end
 
 
 	test "ensure pref is nil for AAAA" do
-		assert_nil_valid(Record.new(:type => 'AAAA'), :pref)
-		assert_not_valid_value(Record.new(:type => 'AAAA'), :pref, 100)
+		assert_nil_valid(Record.new(:rectype => 'AAAA'), :pref)
+		assert_not_valid_value(Record.new(:rectype => 'AAAA'), :pref, 100)
 	end
 
 
 	test "ensure content is valid IPv6 address for AAAA" do
-		assert_valid_value(Record.new(:type => 'AAAA'), :content, '2000::1')
-		assert_not_valid_value(Record.new(:type => 'AAAA'), :content, '127.0.0.1')
-		assert_not_valid_value(Record.new(:type => 'AAAA'), :content, 'www')
-		assert_not_valid_value(Record.new(:type => 'AAAA'), :content, 'www.example.com.')
+		assert_valid_value(Record.new(:rectype => 'AAAA'), :content, '2000::1')
+		assert_not_valid_value(Record.new(:rectype => 'AAAA'), :content, '127.0.0.1')
+		assert_not_valid_value(Record.new(:rectype => 'AAAA'), :content, 'www')
+		assert_not_valid_value(Record.new(:rectype => 'AAAA'), :content, 'www.example.com.')
 	end
 
 
 	test "ensure aaaa? is true" do
-		assert Record.new(:type => 'AAAA').aaaa?
+		assert Record.new(:rectype => 'AAAA').aaaa?
 	end
 
 
@@ -146,33 +146,33 @@ class RecordTest < ActiveSupport::TestCase
 	# CNAME record
 	#
 	test "ensure valid name for CNAME" do
-		assert_name(Record.new(:type => 'CNAME'), :name)
+		assert_name(Record.new(:rectype => 'CNAME'), :name)
 	end
 
 
 	test "allow nil for ttl for CNAME" do
-		assert_nil_valid(Record.new(:type => 'CNAME'), :ttl)
+		assert_nil_valid(Record.new(:rectype => 'CNAME'), :ttl)
 	end
 
 
 	test "ensure ttl is valid DNS time for CNAME" do
-		assert_times(Record.new(:type => 'CNAME'), :ttl)
+		assert_times(Record.new(:rectype => 'CNAME'), :ttl)
 	end
 
 
 	test "ensure pref is nil for CNAME" do
-		assert_nil_valid(Record.new(:type => 'CNAME'), :pref)
-		assert_not_valid_value(Record.new(:type => 'CNAME'), :pref, 100)
+		assert_nil_valid(Record.new(:rectype => 'CNAME'), :pref)
+		assert_not_valid_value(Record.new(:rectype => 'CNAME'), :pref, 100)
 	end
 
 
 	test "ensure content is valid name for CNAME" do
-		assert_name(Record.new(:type => 'CNAME'), :content)
+		assert_name(Record.new(:rectype => 'CNAME'), :content)
 	end
 
 
 	test "ensure cname? is true" do
-		assert Record.new(:type => 'CNAME').cname?
+		assert Record.new(:rectype => 'CNAME').cname?
 	end
 
 
@@ -180,40 +180,40 @@ class RecordTest < ActiveSupport::TestCase
 	# MX record
 	#
 	test "ensure valid name for MX" do
-		assert_name(Record.new(:type => 'MX'), :name)
+		assert_name(Record.new(:rectype => 'MX'), :name)
 	end
 
 
 	test "allow nil for ttl for MX" do
-		assert_nil_valid(Record.new(:type => 'MX'), :ttl)
+		assert_nil_valid(Record.new(:rectype => 'MX'), :ttl)
 	end
 
 
 	test "ensure ttl is valid DNS time for MX" do
-		assert_times(Record.new(:type => 'MX'), :ttl)
+		assert_times(Record.new(:rectype => 'MX'), :ttl)
 	end
 
 
 	test "ensure presence of pref for MX" do
-		assert_nil_not_valid(Record.new(:type => 'MX'), :pref)
+		assert_nil_not_valid(Record.new(:rectype => 'MX'), :pref)
 	end
 
 
 	test "ensure valid value of pref for MX" do
-		assert_value_in_range(Record.new(:type => 'MX'), :pref, 1..9999)
-		assert_not_valid_value(Record.new(:type => 'MX'), :pref, 4.5)
-		assert_not_valid_value(Record.new(:type => 'MX'), :pref, -10)
-		assert_not_valid_value(Record.new(:type => 'MX'), :pref, 'a')
+		assert_value_in_range(Record.new(:rectype => 'MX'), :pref, 1..9999)
+		assert_not_valid_value(Record.new(:rectype => 'MX'), :pref, 4.5)
+		assert_not_valid_value(Record.new(:rectype => 'MX'), :pref, -10)
+		assert_not_valid_value(Record.new(:rectype => 'MX'), :pref, 'a')
 	end
 
 
 	test "ensure content is valid name for MX" do
-		assert_name(Record.new(:type => 'MX'), :content)
+		assert_name(Record.new(:rectype => 'MX'), :content)
 	end
 
 
 	test "ensure mx? is true" do
-		assert Record.new(:type => 'MX').mx?
+		assert Record.new(:rectype => 'MX').mx?
 	end
 
 
@@ -221,33 +221,33 @@ class RecordTest < ActiveSupport::TestCase
 	# NS record
 	#
 	test "ensure valid name for NS" do
-		assert_name(Record.new(:type => 'NS'), :name)
+		assert_name(Record.new(:rectype => 'NS'), :name)
 	end
 
 
 	test "allow nil for ttl for NS" do
-		assert_nil_valid(Record.new(:type => 'NS'), :ttl)
+		assert_nil_valid(Record.new(:rectype => 'NS'), :ttl)
 	end
 
 
 	test "ensure ttl is valid DNS time for NS" do
-		assert_times(Record.new(:type => 'NS'), :ttl)
+		assert_times(Record.new(:rectype => 'NS'), :ttl)
 	end
 
 
 	test "ensure pref is nil for NS" do
-		assert_nil_valid(Record.new(:type => 'NS'), :pref)
-		assert_not_valid_value(Record.new(:type => 'NS'), :pref, 100)
+		assert_nil_valid(Record.new(:rectype => 'NS'), :pref)
+		assert_not_valid_value(Record.new(:rectype => 'NS'), :pref, 100)
 	end
 
 
 	test "ensure content is valid IPv4 address for NS" do
-		assert_name(Record.new(:type => 'NS'), :content)
+		assert_name(Record.new(:rectype => 'NS'), :content)
 	end
 
 
 	test "ensure ns? is true" do
-		assert Record.new(:type => 'NS').ns?
+		assert Record.new(:rectype => 'NS').ns?
 	end
 
 
@@ -255,33 +255,33 @@ class RecordTest < ActiveSupport::TestCase
 	# PTR record
 	#
 	test "ensure valid name for PTR" do
-		assert_name(Record.new(:type => 'PTR'), :name)
+		assert_name(Record.new(:rectype => 'PTR'), :name)
 	end
 
 
 	test "allow nil for ttl for PTR" do
-		assert_nil_valid(Record.new(:type => 'PTR'), :ttl)
+		assert_nil_valid(Record.new(:rectype => 'PTR'), :ttl)
 	end
 
 
 	test "ensure ttl is valid DNS time for PTR" do
-		assert_times(Record.new(:type => 'PTR'), :ttl)
+		assert_times(Record.new(:rectype => 'PTR'), :ttl)
 	end
 
 
 	test "ensure pref is nil for PTR" do
-		assert_nil_valid(Record.new(:type => 'PTR'), :pref)
-		assert_not_valid_value(Record.new(:type => 'PTR'), :pref, 100)
+		assert_nil_valid(Record.new(:rectype => 'PTR'), :pref)
+		assert_not_valid_value(Record.new(:rectype => 'PTR'), :pref, 100)
 	end
 
 
 	test "ensure content is valid name for PTR" do
-		assert_name(Record.new(:type => 'PTR'), :content)
+		assert_name(Record.new(:rectype => 'PTR'), :content)
 	end
 
 
 	test "ensure ptr? is true" do
-		assert Record.new(:type => 'PTR').ptr?
+		assert Record.new(:rectype => 'PTR').ptr?
 	end
 
 
@@ -289,102 +289,102 @@ class RecordTest < ActiveSupport::TestCase
 	# SOA record
 	#
 	test "ensure valid name for SOA" do
-		assert_name(Record.new(:type => 'SOA'), :name)
+		assert_name(Record.new(:rectype => 'SOA'), :name)
 	end
 
 
 	test "ensure presence of ttl for SOA" do
-		assert_nil_not_valid(Record.new(:type => 'SOA'), :ttl)
+		assert_nil_not_valid(Record.new(:rectype => 'SOA'), :ttl)
 	end
 
 
 	test "ensure ttl is valid DNS time for SOA" do
-		assert_times(Record.new(:type => 'SOA'), :ttl)
+		assert_times(Record.new(:rectype => 'SOA'), :ttl)
 	end
 
 
 	test "ensure pref is nil for SOA" do
-		assert_nil_valid(Record.new(:type => 'SOA'), :pref)
-		assert_not_valid_value(Record.new(:type => 'SOA'), :pref, 100)
+		assert_nil_valid(Record.new(:rectype => 'SOA'), :pref)
+		assert_not_valid_value(Record.new(:rectype => 'SOA'), :pref, 100)
 	end
 
 
 	test "ensure presence of mname for SOA" do
-		assert_nil_not_valid(Record.new(:type => 'SOA'), :mname)
+		assert_nil_not_valid(Record.new(:rectype => 'SOA'), :mname)
 	end
 
 
 	test "ensure mname is valid name for SOA" do
-		assert_name(Record.new(:type => 'SOA'), :mname)
+		assert_name(Record.new(:rectype => 'SOA'), :mname)
 	end
 
 
 	test "ensure presence of rname for SOA" do
-		assert_nil_not_valid(Record.new(:type => 'SOA'), :rname)
+		assert_nil_not_valid(Record.new(:rectype => 'SOA'), :rname)
 	end
 
 
 	test "ensure rname is valid name for SOA" do
-		assert_name(Record.new(:type => 'SOA'), :rname)
+		assert_name(Record.new(:rectype => 'SOA'), :rname)
 	end
 
 
 	test "ensure presence of serial for SOA" do
-		assert_nil_not_valid(Record.new(:type => 'SOA'), :serial)
+		assert_nil_not_valid(Record.new(:rectype => 'SOA'), :serial)
 	end
 
 
 	test "ensure serial is valid number for SOA" do
-		assert_value_in_range(Record.new(:type => 'SOA'), :serial, 1..9999999999)
-		assert_not_valid_value(Record.new(:type => 'SOA'), :serial, -10)
-		assert_not_valid_value(Record.new(:type => 'SOA'), :serial, 'a')
-		assert_not_valid_value(Record.new(:type => 'SOA'), :serial, '-')
+		assert_value_in_range(Record.new(:rectype => 'SOA'), :serial, 1..9999999999)
+		#assert_not_valid_value(Record.new(:rectype => 'SOA'), :serial, -10)
+		#assert_not_valid_value(Record.new(:rectype => 'SOA'), :serial, 'a')
+		#assert_not_valid_value(Record.new(:rectype => 'SOA'), :serial, '-')
 	end
 
 
 	test "ensure presence of refresh for SOA" do
-		assert_nil_not_valid(Record.new(:type => 'SOA'), :refresh)
+		assert_nil_not_valid(Record.new(:rectype => 'SOA'), :refresh)
 	end
 
 
 	test "ensure refresh is valid DNS time for SOA" do
-		assert_times(Record.new(:type => 'SOA'), :refresh)
+		assert_times(Record.new(:rectype => 'SOA'), :refresh)
 	end
 
 
 	test "ensure presence of retry for SOA" do
-		assert_nil_not_valid(Record.new(:type => 'SOA'), :retry)
+		assert_nil_not_valid(Record.new(:rectype => 'SOA'), :retry)
 	end
 
 
 	test "ensure retry is valid DNS time for SOA" do
-		assert_times(Record.new(:type => 'SOA'), :retry)
+		assert_times(Record.new(:rectype => 'SOA'), :retry)
 	end
 
 
 	test "ensure presence of expire for SOA" do
-		assert_nil_not_valid(Record.new(:type => 'SOA'), :expire)
+		assert_nil_not_valid(Record.new(:rectype => 'SOA'), :expire)
 	end
 
 
 	test "ensure expire is valid DNS time for SOA" do
-		assert_times(Record.new(:type => 'SOA'), :expire)
+		assert_times(Record.new(:rectype => 'SOA'), :expire)
 	end
 
 
 	test "ensure presence of minimum for SOA" do
-		assert_nil_not_valid(Record.new(:type => 'SOA'), :minimum)
+		assert_nil_not_valid(Record.new(:rectype => 'SOA'), :minimum)
 	end
 
 
 	test "ensure minimum is valid DNS time for SOA" do
-		assert_times(Record.new(:type => 'SOA'), :minimum)
+		assert_times(Record.new(:rectype => 'SOA'), :minimum)
 	end
 
 
 	test "ensure content contains all the information" do
 		record = Record.new(
-			:type => 'SOA',
+			:rectype => 'SOA',
 			:mname => 'ns1.example.com.',
 			:rname => 'root.example.com.',
 			:serial => 1,
@@ -399,13 +399,13 @@ class RecordTest < ActiveSupport::TestCase
 
 
 	test "ensure soa? is true" do
-		assert Record.new(:type => 'SOA').soa?
+		assert Record.new(:rectype => 'SOA').soa?
 	end
 
 
 	test "ensure locked is always true for SOA" do
-		assert Record.new(:type => 'SOA').locked
-		assert Record.new(:type => 'SOA', :locked => false).locked
+		assert Record.new(:rectype => 'SOA').locked
+		assert Record.new(:rectype => 'SOA', :locked => false).locked
 	end
 
 
@@ -413,34 +413,34 @@ class RecordTest < ActiveSupport::TestCase
 	# TXT record
 	#
 	test "ensure valid name for TXT" do
-		assert_name(Record.new(:type => 'TXT'), :name)
+		assert_name(Record.new(:rectype => 'TXT'), :name)
 	end
 
 
 	test "allow nil for ttl for TXT" do
-		assert_nil_valid(Record.new(:type => 'TXT'), :ttl)
+		assert_nil_valid(Record.new(:rectype => 'TXT'), :ttl)
 	end
 
 
 	test "ensure ttl is valid DNS time for TXT" do
-		assert_times(Record.new(:type => 'TXT'), :ttl)
+		assert_times(Record.new(:rectype => 'TXT'), :ttl)
 	end
 
 
 	test "ensure pref is nil for TXT" do
-		assert_nil_valid(Record.new(:type => 'TXT'), :pref)
-		assert_not_valid_value(Record.new(:type => 'TXT'), :pref, 100)
+		assert_nil_valid(Record.new(:rectype => 'TXT'), :pref)
+		assert_not_valid_value(Record.new(:rectype => 'TXT'), :pref, 100)
 	end
 
 
 	test "ensure content is valid text for TXT" do
-		assert_length_in_range(Record.new(:type => 'TXT'), :content, 1..250)
-		assert_valid_value(Record.new(:type => 'TXT'), :content, 'Foo bar')
+		assert_length_in_range(Record.new(:rectype => 'TXT'), :content, 1..250)
+		assert_valid_value(Record.new(:rectype => 'TXT'), :content, 'Foo bar')
 	end
 
 
 	test "ensure txt? is true" do
-		assert Record.new(:type => 'TXT').txt?
+		assert Record.new(:rectype => 'TXT').txt?
 	end
 
 

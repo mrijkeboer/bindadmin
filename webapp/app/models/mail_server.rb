@@ -1,20 +1,11 @@
 require 'validate/dns'
 
-class MailServer
-	include MongoMapper::EmbeddedDocument
+class MailServer < ActiveRecord::Base
 
-	# Attributes
-	key :fqdn, String
-	key :ttl, String
-	key :pref, String
+  belongs_to :default
 
 	# Validations
 	validate :valid_values
-
-
-	def default
-		return self._root_document
-	end
 
 
 	def fqdn=(val)

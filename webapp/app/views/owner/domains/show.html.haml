@@ -10,7 +10,7 @@
     %td= h(@domain.name)
   %tr
     %th Type
-    %td= h @domain.type
+    %td= h @domain.domtype
   - if @domain.slave?
     %tr
       %th Master
@@ -48,10 +48,10 @@
             \&nbsp;
         %td
           - if record.mx?
-            = h(record.type)
+            = h(record.rectype)
             (#{h(record.pref)})
           - else
-            = h(record.type)
+            = h(record.rectype)
         %td= h(record.content)
         %td
           - if record.locked

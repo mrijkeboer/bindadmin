@@ -21,9 +21,9 @@
       %td= f.text_field :ttl
       %td.error= @record.errors[:ttl].first
     %tr
-      %th= f.label :type, "Type:", :class => "required"
-      %td= f.select :type, Record::TYPES
-      %td.error= @record.errors[:type].first
+      %th= f.label :rectype, "Type:", :class => "required"
+      %td= f.select :rectype, Record::TYPES
+      %td.error= @record.errors[:rectype].first
     %tr
       %th= f.label :mname, "Origin:", :class => "required"
       %td= f.text_field :mname

@@ -11,7 +11,7 @@ module NameServerFactory
 
 		def client.name_server(params = {})
 			name_server = NameServer.new(Factory.name_server_attributes.merge(params))
-			default = Factory.default
+			default = Factory.default!
 			default.name_servers << name_server
 			name_server
 		end

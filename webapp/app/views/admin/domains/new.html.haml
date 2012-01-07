@@ -15,15 +15,15 @@
       %td= f.text_field :name
       %td.error= @domain.errors[:name].first
     %tr
-      %th= f.label :type, "Type:", :class => "required"
-      %td= f.select :type, Domain::TYPES
+      %th= f.label :domtype, "Type:", :class => "required"
+      %td= f.select :domtype, Domain::TYPES
     %tr
       %th= f.label :master, "Master:"
       %td= f.text_field :master
       %td.error= @domain.errors[:master].first
     %tr
       %th= f.label :user_id, "Owner:", :class => "required"
-      %td= f.collection_select :user_id, User.sort(:fullname).all, :id, :fullname
+      %td= f.collection_select :user_id, User.order("fullname").all, :id, :fullname
     %tr
       %th &nbsp;
       %td= f.submit "Save", :class => "button"

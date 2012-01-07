@@ -12,7 +12,7 @@
       .edit= link_to 'Edit', edit_admin_domain_url(@domain)
   %tr
     %th Type
-    %td= h @domain.type
+    %td= h @domain.domtype
     - if @domain.slave?
       %tr
         %th Master
@@ -46,10 +46,10 @@
             \&nbsp;
         %td
           - if record.mx?
-            = h(record.type)
+            = h(record.domtype)
             (#{h(record.pref)})
           - else
-            = h(record.type)
+            = h(record.rectype)
         %td= h(record.content)
         %td
           .edit

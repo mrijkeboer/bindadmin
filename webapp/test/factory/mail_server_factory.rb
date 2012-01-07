@@ -12,7 +12,7 @@ module MailServerFactory
 
 		def client.mail_server(params = {})
 			mail_server = MailServer.new(Factory.mail_server_attributes.merge(params))
-			default = Factory.default
+			default = Factory.default!
 			default.mail_servers << mail_server
 			mail_server
 		end

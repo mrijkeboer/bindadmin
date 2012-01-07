@@ -1,13 +1,7 @@
 require 'bcrypt'
 require 'validate/dns'
 
-class Server
-	include MongoMapper::Document
-
-	# Attributes
-	key :servername, String
-	key :password_hash, String
-	timestamps!
+class Server < ActiveRecord::Base
 
 	# Validations
 	validates_presence_of :servername

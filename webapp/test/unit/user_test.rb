@@ -15,7 +15,7 @@ class UserTest < ActiveSupport::TestCase
 		user1 = Factory.user!
 		user2 = Factory.user
 		assert !user2.valid?
-		assert user2.errors.invalid?(:username)
+		assert user2.errors[:username].any?
 	end
 
 
@@ -72,21 +72,21 @@ class UserTest < ActiveSupport::TestCase
 		user.password = 'x' * 5              
 		user.password_confirmation = 'x' * 5 
 		user.valid?                          
-		assert user.errors.invalid?(:password)
+		assert user.errors[:password].any?
 
 		user.password = 'x' * 6
 		user.password_confirmation = 'x' * 6
 		user.valid?                         
-		assert !user.errors.invalid?(:password)
+		assert !user.errors[:password].any?
 
 		user.password = 'x' * 250
 		user.password_confirmation = 'x' * 250
 		user.valid?                           
-		assert !user.errors.invalid?(:password)
+		assert !user.errors[:password].any?
 
 		user.password = 'x' * 251
 		user.valid?              
-		assert user.errors.invalid?(:password)
+		assert user.errors[:password].any?
 	end                                           
 
 
@@ -96,11 +96,11 @@ class UserTest < ActiveSupport::TestCase
 
 		user.password = password
 		user.valid?             
-		assert !user.errors.invalid?(:password)
+		assert !user.errors[:password].any?
 
 		user.password = 'wrongpassword'
 		user.valid?                    
-		assert user.errors.invalid?(:password)
+		assert user.errors[:password].any?
 	end                                           
 
 

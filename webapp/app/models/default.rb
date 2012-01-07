@@ -1,21 +1,9 @@
 require 'validate/dns'
 
-class Default
-	include MongoMapper::Document
+class Default < ActiveRecord::Base
 
-	# Attributes
-	key :ttl, String, :default => '24h'
-	key :mname, String, :default => 'ns1.example.com.'
-	key :rname, String, :default => 'root.example.com.'
-	key :serial, String, :default => '1'
-	key :refresh, String, :default => '1h'
-	key :retry, String, :default => '10m'
-	key :expire, String, :default => '41d'
-	key :minimum, String, :default => '1h'
-
-	# Relationships
-	many :mail_servers
-	many :name_servers
+	has_many :mail_servers
+	has_many :name_servers
 
 	# Validations
 	validate :valid_defaults
