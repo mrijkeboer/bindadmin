@@ -4,8 +4,8 @@ module RecordFactory
 
 		def client.record_attributes
 			{
-				:name => 'www',
-				:type => 'A',
+				:name    => 'www',
+				:rectype => 'A',
 				:content => '127.0.0.1',
 			}
 		end
@@ -13,7 +13,7 @@ module RecordFactory
 
 		def client.record(params = {})
 			record = Record.new(Factory.record_attributes.merge(params))
-			domain = Factory.domain
+			domain = Factory.domain!
 			domain.records << record
 			record
 		end

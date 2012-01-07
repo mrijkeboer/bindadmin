@@ -109,7 +109,7 @@ class Owner::RecordsController < ApplicationController
 		if values[:record]
 			record.name = values[:record][:name]
 			record.ttl = values[:record][:ttl]
-			record.type = values[:record][:type]
+			record.rectype = values[:record][:rectype]
 			record.pref = values[:record][:pref]
 			record.content = values[:record][:content]
 		end

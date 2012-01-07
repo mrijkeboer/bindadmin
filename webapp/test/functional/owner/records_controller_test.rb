@@ -4,11 +4,11 @@ require File.expand_path("../../../factory", __FILE__)
 class Owner::RecordsControllerTest < ActionController::TestCase
 
 	def setup
+		@record = Factory.record()
+    @domain = @record.domain
 		@owner = Factory.owner_user!
-		@domain = Factory.domain(:user => @owner)
-		@record = Factory.record
-		@domain.records << @record
-		@domain.save!
+    @domain.user = @owner
+    @domain.save!
 	end
 
 

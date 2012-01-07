@@ -1,19 +1,11 @@
 require 'validate/dns'
 
-class NameServer
-	include MongoMapper::EmbeddedDocument
+class NameServer < ActiveRecord::Base
 
-	# Attributes
-	key :fqdn, String
-	key :ttl, String
+  belongs_to :default
 
 	# Validations
 	validate :valid_values
-
-
-	def default
-		return self._root_document
-	end
 
 
 	def fqdn=(val)

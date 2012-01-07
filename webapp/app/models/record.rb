@@ -1,30 +1,15 @@
 require 'validate/dns'
 
-class Record
-	include MongoMapper::EmbeddedDocument
-
-	# Attributes
-	key :name, String
-	key :ttl, String
-	key :recclass, String, :default => 'IN'
-	key :type, String
-	key :pref, String
-	key :content, String
-	key :mname, String
-	key :rname, String
-	key :serial, String
-	key :expire, String
-	key :refresh, String
-	key :retry, String
-	key :minimum, String
-	key :locked, Boolean, :default => false
+class Record < ActiveRecord::Base
 
 	TYPES = [ 'NS', 'MX', 'A', 'AAAA', 'CNAME', 'PTR', 'SOA', 'TXT' ]
 	OWNER_TYPES = [ 'A', 'CNAME', 'PTR', 'MX', 'NS', 'AAAA', 'TXT' ]
 
+  belongs_to :domain
+
 	# Validations
-	validates_presence_of :type
-	validates_inclusion_of :type, :within => Record::TYPES, :message => 'invalid type'
+	validates_presence_of :rectype
+	validates_inclusion_of :rectype, :in => Record::TYPES, :message => 'invalid type'
 
 	validate :valid_a, :if => Proc.new { |r| r.a? }
 	validate :valid_aaaa, :if => Proc.new { |r| r.aaaa? }
@@ -34,11 +19,6 @@ class Record
 	validate :valid_ptr, :if => Proc.new { |r| r.ptr? }
 	validate :valid_soa, :if => Proc.new { |r| r.soa? }
 	validate :valid_txt, :if => Proc.new { |r| r.txt? }
-
-
-	def domain
-		return self._root_document
-	end
 
 
 	def name=(val)
@@ -65,14 +45,14 @@ class Record
 	end
 
 
-	def type=(val)
-		self[:type] = val.to_s.upcase
+	def rectype=(val)
+		self[:rectype] = val.to_s.upcase
 	end
 
 
 	def content
 		if self.soa?
-			return "#{@mname} #{@rname} #{@serial.to_s} #{@refresh} #{@retry} #{@expire} #{@minimum}"
+			return "#{mname} #{rname} #{serial.to_s} #{refresh} #{self.retry} #{expire} #{minimum}"
 		else
 			return self[:content]
 		end
@@ -129,41 +109,41 @@ class Record
 
 
 	def a?
-		return self.type.to_s.upcase == 'A'
+		return self.rectype.to_s.upcase == 'A'
 	end
 
 
 	def aaaa?
-		return self.type.to_s.upcase == 'AAAA'
+		return self.rectype.to_s.upcase == 'AAAA'
 	end
 
 
 	def cname?
-		return self.type.to_s.upcase == 'CNAME'
+		return self.rectype.to_s.upcase == 'CNAME'
 	end
 
 
 	def mx?
-		return self.type.to_s.upcase == 'MX'
+		return self.rectype.to_s.upcase == 'MX'
 	end
 
 
 	def ns?
-		return self.type.to_s.upcase == 'NS'
+		return self.rectype.to_s.upcase == 'NS'
 	end
 
 
 	def ptr?
-		return self.type.to_s.upcase == 'PTR'
+		return self.rectype.to_s.upcase == 'PTR'
 	end
 
 	def soa?
-		return self.type.to_s.upcase == 'SOA'
+		return self.rectype.to_s.upcase == 'SOA'
 	end
 
 
 	def txt?
-		return self.type.to_s.upcase == 'TXT'
+		return self.rectype.to_s.upcase == 'TXT'
 	end
 
 
@@ -175,7 +155,7 @@ class Record
 		records << Record.new(
 			:name => "#{domain_name}.",
 			:ttl => default.ttl,
-			:type => 'SOA',
+			:rectype => 'SOA',
 			:mname => default.mname,
 			:rname => default.rname,
 			:serial => default.serial,
@@ -191,7 +171,7 @@ class Record
 			records << Record.new(
 				:name => "#{domain_name}.",
 				:ttl => server.ttl,
-				:type => 'NS',
+				:rectype => 'NS',
 				:content => server.fqdn,
 				:locked => true
 			)
@@ -202,7 +182,7 @@ class Record
 			records << Record.new(
 				:name => "#{domain_name}.",
 				:ttl => server.ttl,
-				:type => 'MX',
+				:rectype => 'MX',
 				:pref => server.pref,
 				:content => server.fqdn,
 				:locked => true
@@ -268,13 +248,13 @@ class Record
 		Validate::Dns.validate_name(name, errors, :name)
 		Validate::Dns.validate_time(ttl, errors, :ttl)
 		Validate::Dns.validate_no_pref(pref, errors, :pref)
-		Validate::Dns.validate_name(@mname, errors, :mname)
-		Validate::Dns.validate_name(@rname, errors, :rname)
-		Validate::Dns.validate_serial(@serial, errors, :serial)
-		Validate::Dns.validate_time(@refresh, errors, :refresh)
-		Validate::Dns.validate_time(@retry, errors, :retry)
-		Validate::Dns.validate_time(@expire, errors, :expire)
-		Validate::Dns.validate_time(@minimum, errors, :minimum)
+		Validate::Dns.validate_name(mname, errors, :mname)
+		Validate::Dns.validate_name(rname, errors, :rname)
+		Validate::Dns.validate_serial(serial, errors, :serial)
+		Validate::Dns.validate_time(refresh, errors, :refresh)
+		Validate::Dns.validate_time(self.retry, errors, :retry)
+		Validate::Dns.validate_time(expire, errors, :expire)
+		Validate::Dns.validate_time(minimum, errors, :minimum)
 	end
 
 

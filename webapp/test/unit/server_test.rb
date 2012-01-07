@@ -20,7 +20,7 @@ class ServerTest < ActiveSupport::TestCase
 		server1 = Factory.server!
 		server2 = Factory.server
 		assert !server2.valid?
-		assert server2.errors.invalid?(:servername)
+		assert server2.errors[:servername].any?
 	end
 
 
@@ -44,21 +44,21 @@ class ServerTest < ActiveSupport::TestCase
 		server.password = 'x' * 5              
 		server.password_confirmation = 'x' * 5 
 		server.valid?                          
-		assert server.errors.invalid?(:password)
+		assert server.errors[:password].any?
 
 		server.password = 'x' * 6
 		server.password_confirmation = 'x' * 6
 		server.valid?                         
-		assert !server.errors.invalid?(:password)
+		assert !server.errors[:password].any?
 
 		server.password = 'x' * 250
 		server.password_confirmation = 'x' * 250
 		server.valid?                           
-		assert !server.errors.invalid?(:password)
+		assert !server.errors[:password].any?
 
 		server.password = 'x' * 251
 		server.valid?              
-		assert server.errors.invalid?(:password)
+		assert server.errors[:password].any?
 	end
 
 
@@ -68,11 +68,11 @@ class ServerTest < ActiveSupport::TestCase
 
 		server.password = password
 		server.valid?             
-		assert !server.errors.invalid?(:password)
+		assert !server.errors[:password].any?
 
 		server.password = 'wrongpassword'
 		server.valid?                    
-		assert server.errors.invalid?(:password)
+		assert server.errors[:password].any?
 	end
 
 

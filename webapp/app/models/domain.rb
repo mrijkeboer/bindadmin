@@ -1,32 +1,21 @@
 require 'validate/dns'
 
-class Domain
-	include MongoMapper::Document
-
-	# Attributes
-	key :user_id, ObjectId
-	key :name, String
-	key :type, String, :default => 'Native'
-	key :master, String
-	key :owner, String     # Cached
-
-	timestamps!
+class Domain < ActiveRecord::Base
 
 	TYPES = [ 'Native', 'Slave' ]
 
-	# Relationships
-	many :allow_queries
-	many :records
 	belongs_to :user
+	has_many :allow_queries
+	has_many :records
 
 	# Validation
 	validates_presence_of :user
 	validates_uniqueness_of :name
-	validates_presence_of :type
 
-	validates_inclusion_of :type, :within => Domain::TYPES, :message => 'invalid type'
+	validates_presence_of :domtype
+	validates_inclusion_of :domtype, :in => Domain::TYPES, :message => 'invalid type'
 
-	validates_length_of :owner, :within => 0..250
+	validates_length_of :owner, :within => 0..250, :allow_nil => true, :allow_blank => true
 
 	validate :valid_native, :if => Proc.new { |d| d.native? }
 	validate :valid_slave, :if => Proc.new { |d| d.slave? }
@@ -52,17 +41,17 @@ class Domain
 
 
 	def native?
-		return self.type.upcase == 'NATIVE'
+		return self.domtype.upcase == 'NATIVE'
 	end
 
 
 	def slave?
-		return self.type.upcase == 'SLAVE'
+		return self.domtype.upcase == 'SLAVE'
 	end
 
 
 	def Domain.changed(timestamp = 0)
-		return Domain.where(:updated_at.gt => Time.at(timestamp.to_i)).all
+		return Domain.where("updated_at > ?", Time.at(timestamp.to_i)).all
 	end
 
 

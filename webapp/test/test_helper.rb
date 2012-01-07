@@ -3,22 +3,6 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
- 	# Drop all columns after each test case.
-	def teardown
-		MongoMapper.database.collections.each do |coll|
-			coll.remove
-		end
-	end
-
-
-	# Make sure that each case has a teardown
-	# method to clear the db after each test.
-	def inherited(base)
-		base.define_method teardown do
-			super
-		end
-	end
-
 	
 	def assert_value_in_range(object, attribute, range)
 		assert_not_valid_value(object, attribute, range.first - 1)
@@ -121,7 +105,7 @@ class ActiveSupport::TestCase
 		object.send("#{attribute}=", nil)
 		object.valid?
 		assert_block "<#{attribute}> expected to be invalid when set to <nil>" do
-			object.errors.invalid?(attribute)
+			object.errors[attribute].any?
 		end
 	end
 
@@ -130,7 +114,7 @@ class ActiveSupport::TestCase
 		object.send("#{attribute}=", nil)
 		object.valid?
 		assert_block "<#{attribute}> expected to be valid when set to <nil>" do
-			!object.errors.invalid?(attribute)
+			!object.errors[attribute].any?
 		end
 	end
 
@@ -139,7 +123,7 @@ class ActiveSupport::TestCase
 		object.send("#{attribute}=", value)
 		object.valid?
 		assert_block "<#{attribute}> expected to be valid when set to <#{value}>" do
-			!object.errors.invalid?(attribute)
+			!object.errors[attribute].any?
 		end
 	end
 
@@ -148,7 +132,7 @@ class ActiveSupport::TestCase
 		object.send("#{attribute}=", value)
 		object.valid?
 		assert_block "<#{attribute}> expected to be invalid when set to <#{value}>" do
-			object.errors.invalid?(attribute)
+			object.errors[attribute].any?
 		end
 	end
 

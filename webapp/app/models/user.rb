@@ -1,21 +1,11 @@
 require 'bcrypt'
 require 'validate/dns'
 
-class User
-	include MongoMapper::Document
+class User < ActiveRecord::Base
 	
-	# Attributes
-	key :username, String
-	key :password_hash, String
-	key :fullname, String
-	key :role, String, :default => 'Owner'
-
-	timestamps!
-
 	ROLES = [ 'Admin', 'Owner' ]
 
-	# Relationships
-	many :domains
+	has_many :domains
 
 	# Validation
 	validates_presence_of :username
@@ -26,7 +16,7 @@ class User
 	validates_length_of :fullname, :within => 3..250
 
 	validates_presence_of :role
-	validates_inclusion_of :role, :within => User::ROLES, :message => 'invalid role'
+	validates_inclusion_of :role, :in => User::ROLES, :message => 'invalid role'
 
 	
 	validate :valid_password

@@ -28,41 +28,41 @@ class DomainTest < ActiveSupport::TestCase
 		domain1 = Factory.domain!
 		domain2 = Factory.domain
 		assert !domain2.valid?
-		assert domain2.errors.invalid?(:name)
+		assert domain2.errors[:name].any?
 	end
 
 
 	#
-	# type
+	# domtype
 	#
-	test "ensure presence of type" do
-		assert_not_valid_value(Domain.new, :type, "")
+	test "ensure presence of domtype" do
+		assert_not_valid_value(Domain.new, :domtype, "")
 	end
 
 
-	test "ensure value of type is 'Native' or 'Slave'" do
-		assert_valid_value(Domain.new, :type, 'Native')
-		assert_valid_value(Domain.new, :type, 'Slave')
-		assert_not_valid_value(Domain.new, :type, 'Master')
+	test "ensure value of domtype is 'Native' or 'Slave'" do
+		assert_valid_value(Domain.new, :domtype, 'Native')
+		assert_valid_value(Domain.new, :domtype, 'Slave')
+		assert_not_valid_value(Domain.new, :domtype, 'Master')
 	end
 
 
 	#
 	# master
 	#
-	test "ensure presence of master when type is 'Slave'" do
-		assert_nil_not_valid(Domain.new(:type => 'Slave'), :master)
+	test "ensure presence of master when domtype is 'Slave'" do
+		assert_nil_not_valid(Domain.new(:domtype => 'Slave'), :master)
 	end
 
 
-	test "ensure master is a valid domain name when type is 'Slave'" do
-		assert_domain_name(Domain.new(:type => 'Slave'), :master)
+	test "ensure master is a valid domain name when domtype is 'Slave'" do
+		assert_domain_name(Domain.new(:domtype => 'Slave'), :master)
 	end
 
 
-	test "ensure non presence of master when type is 'Native'" do
-		assert_nil_valid(Domain.new(:type => 'Native'), :master)
-		assert_not_valid_value(Domain.new(:type => 'Native'), :master, 'example.com')
+	test "ensure non presence of master when domtype is 'Native'" do
+		assert_nil_valid(Domain.new(:domtype => 'Native'), :master)
+		assert_not_valid_value(Domain.new(:domtype => 'Native'), :master, 'example.com')
 	end
 
 
@@ -85,18 +85,18 @@ class DomainTest < ActiveSupport::TestCase
 	#
 	# native?
 	#
-	test "ensure native? returns true when type is 'Native' and false otherwise" do
-		assert Domain.new(:type => 'Native').native?
-		assert !Domain.new(:type => 'Slave').native?
+	test "ensure native? returns true when domtype is 'Native' and false otherwise" do
+		assert Domain.new(:domtype => 'Native').native?
+		assert !Domain.new(:domtype => 'Slave').native?
 	end
 
 
 	#
 	# slave?
 	#
-	test "ensure slave? returns true when type is 'Slave' and false otherwise" do
-		assert Domain.new(:type => 'Slave').slave?
-		assert !Domain.new(:type => 'Native').slave?
+	test "ensure slave? returns true when domtype is 'Slave' and false otherwise" do
+		assert Domain.new(:domtype => 'Slave').slave?
+		assert !Domain.new(:domtype => 'Native').slave?
 	end
 
 
@@ -106,7 +106,7 @@ class DomainTest < ActiveSupport::TestCase
 	test "ensure working of Domain.changed" do
 		Factory.domain!
 		assert_equal 1, Domain.changed().count
-		assert_equal 0, Domain.changed(Time.now.to_i).count
+		assert_equal 0, Domain.changed(Time.now.to_i + 1).count
 	end
 
 
@@ -114,14 +114,14 @@ class DomainTest < ActiveSupport::TestCase
 	# create_records
 	#
 	test "ensure that a new native domain has a soa record" do
-		domain = Factory.domain!(:type => 'Native')
+		domain = Factory.domain!(:domtype => 'Native')
 		assert domain.records.count > 0
 		assert domain.records[0].soa?
 	end
 
 
 	test "ensure that a new slave domain has no records" do
-		domain = Factory.domain!(:type => 'Slave', :master => 'ns1.example.com')
+		domain = Factory.domain!(:domtype => 'Slave', :master => 'ns1.example.com')
 		assert domain.records.count == 0
 	end
 

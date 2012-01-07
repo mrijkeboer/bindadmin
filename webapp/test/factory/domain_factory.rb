@@ -4,9 +4,9 @@ module DomainFactory
 
 		def client.domain_attributes
 			{
-				:name => 'example.com',
-				:type => 'Native',
-				:user => Factory.user
+				:name    => 'example.com',
+				:domtype => 'Native',
+				:user    => Factory.user
 			}
 		end
 

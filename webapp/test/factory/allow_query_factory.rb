@@ -12,7 +12,7 @@ module AllowQueryFactory
 
 		def client.allow_query(params = {})
 			allow_query = AllowQuery.new(Factory.allow_query_attributes.merge(params))
-			domain = Factory.domain
+			domain = Factory.domain!
 			domain.allow_queries << allow_query
 			allow_query
 		end
