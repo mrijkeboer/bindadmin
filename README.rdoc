@@ -8,21 +8,17 @@ The webfrontend has two kinds of users: admins and owners. The admin users can s
 the domains on the server and have full control over the domains. The owner users can only
 see their own domains and can only create and modify records within their domains.
 
-The of the webfrontend is stored in a MongoDB database.
-
 == Install webfrontend
 
-1. Install MongoDB (binaries are available on http://www.mongodb.org).
+1. Download the BindAdmin source (git clone).
 
-2. Download the BindAdmin source (git clone).
+2. Install the needed gems.
 
-3. Install the needed gems.
+3. Start the webfrontend.
 
-4. Start the webfrontend.
+4. Add your DNS servers in the webfrontend.
 
-5. Add your DNS servers in the webfrontend.
-
-6. Add your domains.
+5. Add your domains.
 
 == Install client
 
@@ -39,11 +35,8 @@ The of the webfrontend is stored in a MongoDB database.
 == Dependencies webfrontend
 
  * Bcrypt Ruby (bcrypt-ruby)
- * Mongo Ruby Driver (mongo)
- * MongoMapper (mongo_mapper)
  * Rails (currently 3.0.0)
- * Validatable (jnunemaker-validatable)
- 
+
 == Dependencies client
 
  * Bash
@@ -52,4 +45,4 @@ The of the webfrontend is stored in a MongoDB database.
 
 == Copyright
 
-Copyright (c) 2010 Martijn P. Rijkeboer. See BSD-LICENSE for details.
+Copyright (c) 2010 Martijn Rijkeboer. See BSD-LICENSE for details.
