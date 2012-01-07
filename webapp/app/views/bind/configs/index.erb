@@ -1,7 +1,7 @@
 #!/bin/sh
 
-<%= timestamp(@last_change) %>
+<%= raw timestamp(@last_change) %>
 
-<%= zones_conf(@domains) %>
+<%= raw zones_conf(@domains) %>
 
-<%= zone_files(@changes) %>
+<%= raw zone_files(@changes) %>
