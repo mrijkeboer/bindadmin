@@ -68,13 +68,13 @@ module Bind::ConfigsHelper
 
 	def prepend_soa(content, record)
 		lines = "\\$TTL #{record.ttl}\n\\$ORIGIN #{record.domain.name}\n"
-		lines << "#{record.fqdn_name}\t\t#{record.recclass}\t#{record.type}\t#{record.pref}\t#{record.content}\n"
+		lines << "#{record.fqdn_name}\t\t#{record.recclass}\t#{record.rectype}\t#{record.pref}\t#{record.content}\n"
 		return lines + content
 	end
 
 
 	def append_record(content, record)
-		return content << "#{record.name}\t#{record.ttl}\t#{record.recclass}\t#{record.type}\t#{record.pref}\t#{record.content}\n"
+		return content << "#{record.name}\t#{record.ttl}\t#{record.recclass}\t#{record.rectype}\t#{record.pref}\t#{record.content}\n"
 	end
 
 end
