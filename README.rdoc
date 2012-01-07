@@ -35,7 +35,7 @@ see their own domains and can only create and modify records within their domain
 == Dependencies webfrontend
 
  * Bcrypt Ruby (bcrypt-ruby)
- * Rails (currently 3.0.0)
+ * Rails (currently 3.0.10)
 
 == Dependencies client
 
